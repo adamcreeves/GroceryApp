@@ -2,22 +2,29 @@ package com.example.glossaryapp.activities
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.glossaryapp.R
+import com.example.glossaryapp.helpers.SessionManager
+import com.example.glossaryapp.models.LoginResponse
 import com.example.glossaryapp.models.User
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity() {
+    lateinit var sessionManager: SessionManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        sessionManager = SessionManager(this)
         init()
     }
 
@@ -36,23 +43,21 @@ class LoginActivity : AppCompatActivity() {
             params["password"] = loginPassword
             var jsonObject = JSONObject(params as Map<*, *>)
             var url = "https://grocery-second-app.herokuapp.com/api/auth/login"
-
+            var editor: SharedPreferences.Editor? = null
             var request = JsonObjectRequest(
                 Request.Method.POST, url, jsonObject, {
-                    startActivity(Intent(this, HomeActivity::class.java))
-                    val FILE_NAME = "REGISTERED_USERS_TOKENS"
-                    var KEY_TOKEN = "token"
-                    var sharedPreferences = this.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
-                    var editor = sharedPreferences.edit()
-                    var gson = Gson()
-//                    var tokenResult = gson.fromJson(it, User::class.java)
-//                    editor.putString(KEY_TOKEN, tokenResult[token])
+                    val gson = Gson()
+                    var loginResponse = gson.fromJson(it.toString(), LoginResponse::class.java)
+                    sessionManager.saveUserInfo(loginResponse.user)
                     Toast.makeText(applicationContext, "Login successful", Toast.LENGTH_SHORT).show()
-
+                    Log.d("abc", sessionManager.getUserInfo().toString())
+                    startActivity(Intent(this, HomeActivity::class.java))
             },
                 {
                     Toast.makeText(applicationContext, "Username or password incorrect", Toast.LENGTH_SHORT).show()
                 })
+//
+
             Volley.newRequestQueue(this).add(request)
         }
     }
