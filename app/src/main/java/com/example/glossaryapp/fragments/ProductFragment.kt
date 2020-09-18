@@ -12,11 +12,7 @@ import com.example.glossaryapp.R
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProductFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class ProductFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -49,7 +45,7 @@ class ProductFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param1: String) =
             ProductFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
