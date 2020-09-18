@@ -1,4 +1,4 @@
-# GlossaryApp
+# GroceryApp
 Our first major project in Apolis Android Training
 
 App screenshots:
