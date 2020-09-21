@@ -6,20 +6,22 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.glossaryapp.R
 import com.example.glossaryapp.adapters.AdapterCategory
-import com.example.glossaryapp.models.CategoryDataItem
+import com.example.glossaryapp.app.Endpoints
+import com.example.glossaryapp.models.Category
 import com.example.glossaryapp.models.CategoryResult
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
 
-    var myList: ArrayList<CategoryDataItem> = ArrayList()
-    var adapterCategory: AdapterCategory? = null
+    var myList: ArrayList<Category> = ArrayList()
+    lateinit var adapterCategory: AdapterCategory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,24 +30,20 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        image_view_home_headline_image.setImageResource(R.drawable.app_logo)
         getData()
-        adapterCategory = AdapterCategory(this, myList)
-        recycler_view.layoutManager = GridLayoutManager(this, 2)
+
+        adapterCategory = AdapterCategory(this)
+        recycler_view.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recycler_view.adapter = adapterCategory
 
-
+        image_view_home_headline_image.setImageResource(R.drawable.app_logo)
     }
 
     private fun getData() {
-        var url = "https://grocery-second-app.herokuapp.com/api/category"
-        var requestQueue = Volley.newRequestQueue(this)
-        var request = StringRequest(Request.Method.GET, url, {
+        var request = StringRequest(Request.Method.GET, Endpoints.getCategory(), {
             var gson = Gson()
             var categoryResult = gson.fromJson(it, CategoryResult::class.java)
-
-            myList.addAll(categoryResult.data)
-            adapterCategory?.setData(myList)
+            adapterCategory.setData(categoryResult.data)
 
             Toast.makeText(applicationContext, "Category Images are Loading...", Toast.LENGTH_SHORT).show()
             progress_bar.visibility = View.GONE
@@ -53,6 +51,6 @@ class HomeActivity : AppCompatActivity() {
             {
 
             })
-        requestQueue.add(request)
+        Volley.newRequestQueue(this).add(request)
     }
 }

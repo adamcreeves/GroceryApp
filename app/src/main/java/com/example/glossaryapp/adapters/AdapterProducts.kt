@@ -8,15 +8,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.glossaryapp.R
 import com.example.glossaryapp.activities.ProductDetailActivity
-import com.example.glossaryapp.models.CategoryDataItem
-import com.example.glossaryapp.models.ProductDataItem
+import com.example.glossaryapp.models.Product
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row_subcategory_adapter.view.*
 
-class AdapterProducts(private var myContext: Context, private var myList: ArrayList<ProductDataItem>) : RecyclerView.Adapter<AdapterProducts.myViewHolder>() {
+class AdapterProducts(private var myContext: Context, private var myList: ArrayList<Product>) : RecyclerView.Adapter<AdapterProducts.myViewHolder>() {
 
     inner class myViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(products: ProductDataItem) {
+        fun bind(products: Product) {
             itemView.text_view_product_name.text = products.productName
             itemView.text_view_price.text = products.price.toString()
             var imageUrl = "https://rjtmobile.com/grocery/images/"
@@ -43,7 +42,7 @@ class AdapterProducts(private var myContext: Context, private var myList: ArrayL
     }
 
     override fun onBindViewHolder(holder: myViewHolder, position: Int) {
-        var products: ProductDataItem = myList[position]
+        var products: Product = myList[position]
         holder.bind(products)
     }
 
@@ -51,7 +50,7 @@ class AdapterProducts(private var myContext: Context, private var myList: ArrayL
         return myList.size
     }
 
-    fun setData(list: ArrayList<ProductDataItem>){
+    fun setData(list: ArrayList<Product>){
         myList = list
         notifyDataSetChanged()
     }

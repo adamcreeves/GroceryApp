@@ -10,6 +10,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.glossaryapp.R
+import com.example.glossaryapp.app.Endpoints
 import com.example.glossaryapp.helpers.SessionManager
 import com.example.glossaryapp.models.LoginResponse
 import com.google.gson.Gson
@@ -40,10 +41,9 @@ class LoginActivity : AppCompatActivity() {
             params["email"] = loginEmail
             params["password"] = loginPassword
             var jsonObject = JSONObject(params as Map<*, *>)
-            var url = "https://grocery-second-app.herokuapp.com/api/auth/login"
             var editor: SharedPreferences.Editor? = null
             var request = JsonObjectRequest(
-                Request.Method.POST, url, jsonObject, {
+                Request.Method.POST, Endpoints.getLogin(), jsonObject, {
                     val gson = Gson()
                     var loginResponse = gson.fromJson(it.toString(), LoginResponse::class.java)
                     sessionManager.saveUserInfo(loginResponse.user)

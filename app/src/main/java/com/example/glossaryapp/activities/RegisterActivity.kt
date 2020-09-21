@@ -8,6 +8,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.glossaryapp.R
+import com.example.glossaryapp.app.Endpoints
 import kotlinx.android.synthetic.main.activity_register.*
 import org.json.JSONObject
 
@@ -38,10 +39,9 @@ class RegisterActivity : AppCompatActivity() {
             params["mobile"] = mobile
 
             var jsonObject = JSONObject(params as Map<*, *>)
-            var url = "https://grocery-second-app.herokuapp.com/api/auth/register"
             if(password == confirmPassword){
                 var request = JsonObjectRequest(
-                    Request.Method.POST, url, jsonObject, {
+                    Request.Method.POST, Endpoints.getRegister(), jsonObject, {
                     Toast.makeText(applicationContext, "Registration successful", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, LoginActivity::class.java))
                 },

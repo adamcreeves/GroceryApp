@@ -7,52 +7,51 @@ import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.glossaryapp.R
-import com.example.glossaryapp.adapters.AdapterTabView
+import com.example.glossaryapp.adapters.AdapterFragment
+import com.example.glossaryapp.app.Endpoints
+import com.example.glossaryapp.models.Category
 import com.example.glossaryapp.models.SubCategoriesResult
-import com.example.glossaryapp.models.SubCategoryDataItem
+import com.example.glossaryapp.models.SubCategory
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_sub_category.*
 
 class SubCategoryActivity : AppCompatActivity() {
 
-    var myList: ArrayList<SubCategoryDataItem> = ArrayList()
-    var adapterSubCategory: AdapterTabView? = null
-
+    var myList: ArrayList<SubCategory> = ArrayList()
+    lateinit var adapterFragment: AdapterFragment
+    var catId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sub_category)
-        var categoryId = intent.getIntExtra("CAT_ID", 1).toString()
+        var catId = intent.getIntExtra(Category.KEY_CAT_ID, 1)
 
         init()
     }
 
     private fun init() {
-
-        getData()
-
+        getData(catId)
+        adapterFragment = AdapterFragment(supportFragmentManager)
 
     }
 
-    private fun getData() {
-        var url = "https://grocery-second-app.herokuapp.com/api/products"
-        var requestQueue = Volley.newRequestQueue(this)
-        var request = StringRequest(Request.Method.GET, url, {
+    private fun getData(catId: Int) {
+        var request = StringRequest(Request.Method.GET, Endpoints.getSubcategoryByCatId(catId), {
             var gson = Gson()
             var subCategoriesResults = gson.fromJson(it, SubCategoriesResult::class.java)
             myList.addAll(subCategoriesResults.data)
-            for(i in 0 until myList.size) {
-                adapterSubCategory?.addFragment(myList[i].subName, myList[i].subId)
+            for (i in 0 until myList.size) {
+                adapterFragment.addFragment(myList[i])
             }
-            adapterSubCategory?.dataChange()
             Toast.makeText(this, "Products are Loading...", Toast.LENGTH_SHORT).show()
-            adapterSubCategory = AdapterTabView(supportFragmentManager)
-            view_pager.adapter = adapterSubCategory
-            tab_layout.setupWithViewPager(view_pager)
+            view_pager_subCatActivity.adapter = adapterFragment
+            tab_layout.setupWithViewPager(view_pager_subCatActivity)
+
         },
             {
 
             })
-        requestQueue.add(request)
+        Volley.newRequestQueue(this).add(request)
+
     }
 }
