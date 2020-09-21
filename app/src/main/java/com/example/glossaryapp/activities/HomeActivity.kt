@@ -30,9 +30,11 @@ class HomeActivity : AppCompatActivity() {
     private fun init() {
         image_view_home_headline_image.setImageResource(R.drawable.app_logo)
         getData()
-        button_debug.setOnClickListener {
-            startActivity(Intent(this, SubCategoryActivity::class.java))
-        }
+        adapterCategory = AdapterCategory(this, myList)
+        recycler_view.layoutManager = GridLayoutManager(this, 2)
+        recycler_view.adapter = adapterCategory
+
+
     }
 
     private fun getData() {
@@ -44,9 +46,7 @@ class HomeActivity : AppCompatActivity() {
 
             myList.addAll(categoryResult.data)
             adapterCategory?.setData(myList)
-            adapterCategory = AdapterCategory(this, myList)
-            recycler_view.layoutManager = GridLayoutManager(this, 2)
-            recycler_view.adapter = adapterCategory
+
             Toast.makeText(applicationContext, "Category Images are Loading...", Toast.LENGTH_SHORT).show()
             progress_bar.visibility = View.GONE
         },

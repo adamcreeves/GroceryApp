@@ -5,29 +5,36 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
+import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.glossaryapp.R
-import com.example.glossaryapp.adapters.AdapterSubCategory
-import com.example.glossaryapp.models.Product
-import com.example.glossaryapp.models.ProductData
+import com.example.glossaryapp.adapters.AdapterProducts
+import com.example.glossaryapp.models.ProductDataItem
+import com.example.glossaryapp.models.ProductResults
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.fragment_product_list_view.view.*
 
 
 private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
 class ProductFragment : Fragment() {
-    var myList: ArrayList<ProductData> = ArrayList()
 
-    private var subcategoryName: String? = null
+    private var title: String? = null
+    private var subId: Int? = null
+    var myList: ArrayList<ProductDataItem> = ArrayList()
+    var adapterProducts: AdapterProducts? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            subcategoryName = it.getString(ARG_PARAM1)
+            title = it.getString(ARG_PARAM1)
+            subId = it.getInt(ARG_PARAM2)
             }
-//        generateData(subcategoryName!!)
+            generateData(subId!!)
     }
 
     override fun onCreateView(
@@ -37,49 +44,38 @@ class ProductFragment : Fragment() {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_product_list_view, container, false)
         init(view)
-        generateData(subcategoryName!!)
         return view
     }
 
     private fun init(view: View) {
-        var myAdapter = AdapterSubCategory(view.context, myList)
-
+        adapterProducts = AdapterProducts(activity!!, myList)
+        view.recycler_view_fragment.layoutManager = LinearLayoutManager(activity!!)
+        view.recycler_view_fragment.adapter = adapterProducts
     }
 
-    private fun generateData(subcategoryName: String) {
-        when(subcategoryName){
-            "Fried/Barbeque/Combos" -> {
+    private fun generateData(subId: Int) {
+        var url = "https://grocery-second-app.herokuapp.com/api/products/sub/$subId"
+        var requestQueue = Volley.newRequestQueue(activity!!)
+        var request = StringRequest(Request.Method.GET, url, Response.Listener {
+            var gson = Gson()
+            var productResults = gson.fromJson(it, ProductResults::class.java)
+            myList.addAll(productResults.data)
+            adapterProducts?.dataChange()
+        },
+        Response.ErrorListener {
 
-            }
-            "Veg Fried/Veg Combos" -> {
-
-            }
-            "Fruits/Vegetables" -> {
-
-            }
-            "Veg Fried" -> {
-
-            }
-            "Fruits" -> {
-
-            }
-            "Vegetables" -> {
-
-            }
-            "Beef Kababs" -> {
-
-            }
-        }
-
+        })
+        requestQueue.add(request)
     }
 
     companion object {
 
         @JvmStatic
-        fun newInstance(param1: String) =
+        fun newInstance(title: String, subId: Int) =
             ProductFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, subcategoryName)
+                    putString(ARG_PARAM1, title)
+                    putInt(ARG_PARAM2, subId)
 
                 }
             }

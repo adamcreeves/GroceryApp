@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.row_category_adapter.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class AdapterCategory(var myContext: Context, var myList: ArrayList<CategoryDataItem>) : RecyclerView.Adapter<AdapterCategory.myViewHolder>() {
+class AdapterCategory(private var myContext: Context, private var myList: ArrayList<CategoryDataItem>) : RecyclerView.Adapter<AdapterCategory.myViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myViewHolder {
         var view = LayoutInflater.from(myContext).inflate(R.layout.row_category_adapter, parent, false)
@@ -50,7 +50,7 @@ class AdapterCategory(var myContext: Context, var myList: ArrayList<CategoryData
 
             itemView.setOnClickListener{
                 var intent = Intent(myContext, SubCategoryActivity::class.java)
-//                intent.putExtra("CAT_ID", category.catId)
+                intent.putExtra("CAT_ID", category.catId)
 //                intent.putExtra("_ID", category._id)
 //                intent.putExtra("CAT_NAME", category.catName)
 //                intent.putExtra("SLUG", category.slug)

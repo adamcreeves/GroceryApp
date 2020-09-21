@@ -5,26 +5,27 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.example.glossaryapp.fragments.ProductFragment
 
-class AdapterProductFragment(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class AdapterTabView (fm: FragmentManager) : FragmentPagerAdapter(fm) {
     var myFragmentList: ArrayList<Fragment> = ArrayList()
     var myTitleList: ArrayList<String> = ArrayList()
-
 
     override fun getCount(): Int {
         return myFragmentList.size
     }
 
     override fun getItem(position: Int): Fragment {
-        return myFragmentList.get(position)
-    }
-
-    fun addFragment(productName: String) {
-        myFragmentList.add(ProductFragment.newInstance(productName))
-        myTitleList.add(productName)
+        return myFragmentList[position]
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return myTitleList.get(position)
+        return myTitleList[position]
+    }
+    fun dataChange() {
+        notifyDataSetChanged()
+    }
 
+    fun addFragment(title: String, subId: Int) {
+        myFragmentList.add(ProductFragment.newInstance(title, subId))
+        myTitleList.add(title)
     }
 }

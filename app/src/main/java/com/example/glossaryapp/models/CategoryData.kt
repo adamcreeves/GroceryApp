@@ -3,7 +3,7 @@ package com.example.glossaryapp.models
 data class CategoryResult(
     var error: Boolean? = null,
     var count: Int?,
-    var data: List<CategoryDataItem>
+    var `data`: List<CategoryDataItem>
 )
 
 
@@ -22,7 +22,7 @@ data class CategoryDataItem(
 
 data class SubCategoriesResult(
     val count: Int,
-    val data: List<SubCategoryDataItem>,
+    val `data`: List<SubCategoryDataItem>,
     val error: Boolean
 )
 
@@ -37,13 +37,13 @@ data class SubCategoryDataItem(
     val subName: String
 )
 
-data class Product(
+data class ProductResults(
     val count: Int,
-    val data: List<ProductData>,
+    val `data`: List<ProductDataItem>,
     val error: Boolean
 )
 
-data class ProductData(
+data class ProductDataItem(
     val __v: Int,
     val _id: String,
     val catId: Int,
