@@ -6,25 +6,25 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.example.glossaryapp.fragments.ProductFragment
 
 class AdapterProductFragment(fm: FragmentManager) : FragmentPagerAdapter(fm) {
-    var mFragmentList: ArrayList<Fragment> = ArrayList()
-    var mTitleList: ArrayList<String> = ArrayList()
+    var myFragmentList: ArrayList<Fragment> = ArrayList()
+    var myTitleList: ArrayList<String> = ArrayList()
 
 
     override fun getCount(): Int {
-        return mFragmentList.size
+        return myFragmentList.size
     }
 
     override fun getItem(position: Int): Fragment {
-        return mFragmentList.get(position)
+        return myFragmentList.get(position)
     }
 
     fun addFragment(productName: String) {
-        mFragmentList.add(ProductFragment.newInstance(productName))
-        mTitleList.add(productName)
+        myFragmentList.add(ProductFragment.newInstance(productName))
+        myTitleList.add(productName)
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return mTitleList.get(position)
+        return myTitleList.get(position)
 
     }
 }

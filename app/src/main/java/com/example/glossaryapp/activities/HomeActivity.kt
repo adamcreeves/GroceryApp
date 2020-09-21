@@ -1,5 +1,6 @@
 package com.example.glossaryapp.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -27,8 +28,11 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        image_view_home_headline_image.setImageResource(R.drawable.me_with_mustache)
+        image_view_home_headline_image.setImageResource(R.drawable.app_logo)
         getData()
+        button_debug.setOnClickListener {
+            startActivity(Intent(this, SubCategoryActivity::class.java))
+        }
     }
 
     private fun getData() {
@@ -37,6 +41,7 @@ class HomeActivity : AppCompatActivity() {
         var request = StringRequest(Request.Method.GET, url, {
             var gson = Gson()
             var categoryResult = gson.fromJson(it, CategoryResult::class.java)
+
             myList.addAll(categoryResult.data)
             adapterCategory?.setData(myList)
             adapterCategory = AdapterCategory(this, myList)

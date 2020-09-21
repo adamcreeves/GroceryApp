@@ -2,12 +2,24 @@ package com.example.glossaryapp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.Request
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.example.glossaryapp.R
-import com.squareup.picasso.Picasso
+import com.example.glossaryapp.adapters.AdapterSubCategory
+import com.example.glossaryapp.models.Product
+import com.example.glossaryapp.models.ProductData
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_sub_category.*
-import kotlinx.android.synthetic.main.row_category_adapter.view.*
 
 class SubCategoryActivity : AppCompatActivity() {
+
+    var myList: ArrayList<ProductData> = ArrayList()
+    var adapterSubCategory: AdapterSubCategory? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sub_category)
@@ -15,26 +27,27 @@ class SubCategoryActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        var catId = intent.getStringExtra("CAT_ID")?.toInt()
-        var _id = intent.getStringExtra("_ID")
-        var catName = intent.getStringExtra("CAT_NAME")
-        var slug = intent.getStringExtra("SLUG")
-        var catImage = intent.getStringExtra("CAT_IMAGE")
-        var imageUrl = "http://rjtmobile.com/grocery/images/"
-        text_view_category_title.text = catName
-        Picasso.get()
-            .load(imageUrl + catImage)
-            .resize(300,300)
-            .centerCrop()
-            .placeholder(R.drawable.image_loading)
-            .error(R.drawable.image_didnt_load)
-            .into(image_view_subcategory)
+
+        getData()
+
+    }
+
+    private fun getData() {
+        var url = "https://grocery-second-app.herokuapp.com/api/products"
+        var requestQueue = Volley.newRequestQueue(this)
+        var request = StringRequest(Request.Method.GET, url, {
+            var gson = Gson()
+            var products = gson.fromJson(it, Product::class.java)
+            myList.addAll(products.data)
+            adapterSubCategory?.setData(myList)
+            adapterSubCategory = AdapterSubCategory(this, myList)
+            recycler_view.layoutManager = LinearLayoutManager(this)
+            recycler_view.adapter = adapterSubCategory
+            Toast.makeText(this, "Products are Loading...", Toast.LENGTH_SHORT).show()
+        },
+            {
+
+            })
+        requestQueue.add(request)
     }
 }
-
-
-//"CAT_ID", category.catId)
-//intent.putExtra("_ID", category._id)
-//intent.putExtra("CAT_NAME", category.catName)
-//intent.putExtra("SLUG", category.slug)
-//intent.putExtra("CAT_IMAGE", category.catImage)

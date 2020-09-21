@@ -4,6 +4,13 @@
     android:background="@color/colorPrimary"
     android:padding="10dp">
 
+    <Button
+        android:id="@+id/button_debug"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="delete after debug" />
+
+
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
@@ -12,11 +19,18 @@
 
     <ImageView
         android:id="@+id/image_view_home_headline_image"
-        android:layout_width="200dp"
-        android:layout_height="275dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_centerHorizontal="true" />
 
-
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="The Best Grocery App in Town"
+    android:textStyle="italic"
+    android:textSize="15dp"
+    android:layout_marginTop="270dp"
+    android:layout_centerHorizontal="true" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="350dp"

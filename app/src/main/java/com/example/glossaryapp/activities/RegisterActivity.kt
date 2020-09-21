@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.android.volley.Request
-import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.glossaryapp.R
@@ -20,6 +19,8 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun init() {
+
+//
         button_register_to_login.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
@@ -39,7 +40,8 @@ class RegisterActivity : AppCompatActivity() {
             var jsonObject = JSONObject(params as Map<*, *>)
             var url = "https://grocery-second-app.herokuapp.com/api/auth/register"
             if(password == confirmPassword){
-                var request = JsonObjectRequest(Request.Method.POST, url, jsonObject, {
+                var request = JsonObjectRequest(
+                    Request.Method.POST, url, jsonObject, {
                     Toast.makeText(applicationContext, "Registration successful", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, LoginActivity::class.java))
                 },

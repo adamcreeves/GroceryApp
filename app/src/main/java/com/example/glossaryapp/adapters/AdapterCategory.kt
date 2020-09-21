@@ -41,27 +41,20 @@ class AdapterCategory(var myContext: Context, var myList: ArrayList<CategoryData
             var imageUrl = "http://rjtmobile.com/grocery/images/"
             Picasso.get()
                 .load(imageUrl + category.catImage)
-                .resize(200,200)
+                .resize(250,250)
                 .centerCrop()
                 .placeholder(R.drawable.image_loading)
                 .error(R.drawable.image_didnt_load)
                 .into(itemView.image_view_home_categories)
 
-//            when(category.catId){
-//                1 -> itemView.image_view_home_categories.setImageResource(R.drawable.category_chicken)
-//                2 -> itemView.image_view_home_categories.setImageResource(R.drawable.category_veg)
-//                3 -> itemView.image_view_home_categories.setImageResource(R.drawable.category_fruits)
-//                4 -> itemView.image_view_home_categories.setImageResource(R.drawable.category_beef)
-//                5 -> itemView.image_view_home_categories.setImageResource(R.drawable.category_sehri)
-//            }
 
             itemView.setOnClickListener{
                 var intent = Intent(myContext, SubCategoryActivity::class.java)
-                intent.putExtra("CAT_ID", category.catId)
-                intent.putExtra("_ID", category._id)
-                intent.putExtra("CAT_NAME", category.catName)
-                intent.putExtra("SLUG", category.slug)
-                intent.putExtra("CAT_IMAGE", category.catImage)
+//                intent.putExtra("CAT_ID", category.catId)
+//                intent.putExtra("_ID", category._id)
+//                intent.putExtra("CAT_NAME", category.catName)
+//                intent.putExtra("SLUG", category.slug)
+//                intent.putExtra("CAT_IMAGE", category.catImage)
                 myContext.startActivity(intent)
             }
         }

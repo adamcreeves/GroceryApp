@@ -1,6 +1,5 @@
 package com.example.glossaryapp.activities
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +12,6 @@ import com.android.volley.toolbox.Volley
 import com.example.glossaryapp.R
 import com.example.glossaryapp.helpers.SessionManager
 import com.example.glossaryapp.models.LoginResponse
-import com.example.glossaryapp.models.User
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
