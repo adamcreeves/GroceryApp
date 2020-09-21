@@ -1,5 +1,7 @@
 package com.example.glossaryapp.models
 
+import java.io.Serializable
+
 data class ProductResults(
     val count: Int,
     val data: ArrayList<Product>,
@@ -21,4 +23,8 @@ data class Product(
     val status: Boolean,
     val subId: Int,
     val unit: String
-)
+) : Serializable {
+    companion object{
+        const val KEY_PRODUCT = "product"
+    }
+}

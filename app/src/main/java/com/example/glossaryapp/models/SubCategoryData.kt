@@ -17,6 +17,6 @@ data class SubCategory(
     val subName: String
 ){
     companion object{
-
+        const val KEY_TO_SUB_ID = "subId"
     }
 }

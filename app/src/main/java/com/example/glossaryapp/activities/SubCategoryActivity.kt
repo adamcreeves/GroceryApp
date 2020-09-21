@@ -24,7 +24,7 @@ class SubCategoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sub_category)
-        var catId = intent.getIntExtra(Category.KEY_CAT_ID, 1)
+        catId = intent.getIntExtra(Category.KEY_CAT_ID, 1)
 
         init()
     }
