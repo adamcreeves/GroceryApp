@@ -19,9 +19,9 @@ class AdapterProducts(private var myContext: Context, private var myList: ArrayL
         fun bind(products: ProductDataItem) {
             itemView.text_view_product_name.text = products.productName
             itemView.text_view_price.text = products.price.toString()
-            var imageUrl = "https://rjtmobile.com/grocery/images/${products.image}"
+            var imageUrl = "https://rjtmobile.com/grocery/images/"
             Picasso.get()
-                .load(imageUrl)
+                .load(imageUrl + products.image)
                 .resize(100,100)
                 .centerCrop()
                 .placeholder(R.drawable.image_loading)
