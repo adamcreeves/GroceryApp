@@ -60,7 +60,7 @@ class ProductFragment : Fragment() {
             var gson = Gson()
             var productResults = gson.fromJson(it, ProductResults::class.java)
             myList.addAll(productResults.data)
-            adapterProducts?.dataChange()
+            adapterProducts?.setData(myList)
         },
         Response.ErrorListener {
 

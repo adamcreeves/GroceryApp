@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.glossaryapp.R
 import com.example.glossaryapp.activities.ProductDetailActivity
+import com.example.glossaryapp.models.CategoryDataItem
 import com.example.glossaryapp.models.ProductDataItem
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row_subcategory_adapter.view.*
@@ -46,13 +47,12 @@ class AdapterProducts(private var myContext: Context, private var myList: ArrayL
         holder.bind(products)
     }
 
-    fun dataChange() {
-        notifyDataSetChanged()
-    }
-
     override fun getItemCount(): Int {
         return myList.size
     }
 
-
+    fun setData(list: ArrayList<ProductDataItem>){
+        myList = list
+        notifyDataSetChanged()
+    }
 }

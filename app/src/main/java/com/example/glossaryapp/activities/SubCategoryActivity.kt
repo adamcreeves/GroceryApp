@@ -22,7 +22,7 @@ class SubCategoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sub_category)
-        var categoryId = intent.getIntExtra("CATID", 1).toString()
+        var categoryId = intent.getIntExtra("CAT_ID", 1).toString()
 
         init()
     }
@@ -30,9 +30,7 @@ class SubCategoryActivity : AppCompatActivity() {
     private fun init() {
 
         getData()
-        adapterSubCategory = AdapterTabView(supportFragmentManager)
-        view_pager.adapter = adapterSubCategory
-        tab_layout.setupWithViewPager(view_pager)
+
 
     }
 
@@ -48,6 +46,9 @@ class SubCategoryActivity : AppCompatActivity() {
             }
             adapterSubCategory?.dataChange()
             Toast.makeText(this, "Products are Loading...", Toast.LENGTH_SHORT).show()
+            adapterSubCategory = AdapterTabView(supportFragmentManager)
+            view_pager.adapter = adapterSubCategory
+            tab_layout.setupWithViewPager(view_pager)
         },
             {
 
