@@ -2,6 +2,8 @@ package com.example.glossaryapp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
@@ -14,23 +16,47 @@ import com.example.glossaryapp.models.SubCategoriesResult
 import com.example.glossaryapp.models.SubCategory
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_sub_category.*
+import kotlinx.android.synthetic.main.app_bar.*
 
 class SubCategoryActivity : AppCompatActivity() {
 
     var myList: ArrayList<SubCategory> = ArrayList()
     lateinit var adapterFragment: AdapterFragment
-    var catId = 0
+    var category: Category? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sub_category)
-        catId = intent.getIntExtra(Category.KEY_CAT_ID, 1)
+        category = intent.getSerializableExtra(Category.KEY_CATEGORY) as Category
 
         init()
     }
 
+    private fun setupToolBar() {
+        var toolbar = toolbar
+        toolbar.title = category!!.catName
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> finish()
+            R.id.action_cart -> Toast.makeText(applicationContext, "You just clicked on the Shopping Cart. Great work!", Toast.LENGTH_SHORT).show()
+            R.id.action_settings -> Toast.makeText(applicationContext, "You just clicked on Settings. Great work!", Toast.LENGTH_SHORT).show()
+            R.id.action_profile -> Toast.makeText(applicationContext, "You just clicked on Profile. Great work!", Toast.LENGTH_SHORT).show()
+        }
+        return true
+    }
+
     private fun init() {
-        getData(catId)
+        setupToolBar()
+        getData(category!!.catId)
         adapterFragment = AdapterFragment(supportFragmentManager)
 
     }

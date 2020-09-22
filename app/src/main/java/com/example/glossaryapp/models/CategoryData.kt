@@ -1,5 +1,7 @@
 package com.example.glossaryapp.models
 
+import java.io.Serializable
+
 data class CategoryResult(
     var error: Boolean? = null,
     var count: Int?,
@@ -18,9 +20,9 @@ data class Category(
     val position: Int,
     val slug: String,
     val status: Boolean
-){
+) : Serializable {
     companion object{
-        const val KEY_CAT_ID = "catId"
+        const val KEY_CATEGORY = "category"
     }
 }
 

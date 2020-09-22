@@ -52,7 +52,7 @@ class AdapterCategory(var myContext: Context) : RecyclerView.Adapter<AdapterCate
 
             itemView.setOnClickListener{
                 var intent = Intent(myContext, SubCategoryActivity::class.java)
-                intent.putExtra(Category.KEY_CAT_ID, category.catId)
+                intent.putExtra(Category.KEY_CATEGORY, category)
                 myContext.startActivity(intent)
             }
         }

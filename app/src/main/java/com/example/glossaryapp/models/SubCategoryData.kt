@@ -1,5 +1,7 @@
 package com.example.glossaryapp.models
 
+import java.io.Serializable
+
 data class SubCategoriesResult(
     val count: Int,
     val data: ArrayList<SubCategory>,
@@ -15,8 +17,9 @@ data class SubCategory(
     val subId: Int,
     val subImage: String,
     val subName: String
-){
+) : Serializable {
     companion object{
         const val KEY_TO_SUB_ID = "subId"
+        const val KEY_SUBCATEGORY = "subCategory"
     }
 }
