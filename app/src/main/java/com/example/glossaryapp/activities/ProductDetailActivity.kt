@@ -28,7 +28,21 @@ class ProductDetailActivity : AppCompatActivity() {
         init()
     }
 
-//    private fun setupToolBar() {
+    private fun init() {
+//        setupToolBar()
+        text_view_details_product_name.text = product?.productName
+        text_view_details_description.text = product?.description
+        text_view_details_price.text = product?.price.toString()
+        Picasso.get()
+            .load(Configure.IMAGE_URL + product?.image)
+            .resize(200,200)
+            .centerCrop()
+            .placeholder(R.drawable.image_loading)
+            .error(R.drawable.image_didnt_load)
+            .into(image_view_details_image)
+    }
+
+    //    private fun setupToolBar() {
 //        var toolbar = toolbar
 //        toolbar.title = product!!.productName
 //        setSupportActionBar(toolbar)
@@ -49,19 +63,5 @@ class ProductDetailActivity : AppCompatActivity() {
 //        }
 //        return true
 //    }
-
-
-    private fun init() {
-//        setupToolBar()
-        text_view_details_product_name.text = product?.productName
-        text_view_details_price.text = product?.price.toString()
-        Picasso.get()
-            .load(Configure.IMAGE_URL + product?.image)
-            .resize(200,200)
-            .centerCrop()
-            .placeholder(R.drawable.image_loading)
-            .error(R.drawable.image_didnt_load)
-            .into(image_view_details_image)
-    }
 
 }

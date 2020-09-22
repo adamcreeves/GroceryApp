@@ -23,6 +23,15 @@
             android:text="Product Name"
             android:textColor="#fff"
             android:textSize="40dp" />
+        <TextView
+            android:id="@+id/text_view_details_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textStyle="italic"
+            android:textSize="20dp"
+            android:textColor="#fff"
+            />
 
 
     </LinearLayout>
@@ -36,6 +45,7 @@
         android:layout_margin="10dp"
         android:textColor="#fff"
         android:text="Price"
+        android:textStyle="bold"
         android:textSize="40dp" />
 
     <Button
@@ -45,6 +55,7 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="center_horizontal"
         android:layout_margin="10dp"
+        android:textColor="@color/colorTextMain"
         android:text="Add to Cart" />
 
 </RelativeLayout>
