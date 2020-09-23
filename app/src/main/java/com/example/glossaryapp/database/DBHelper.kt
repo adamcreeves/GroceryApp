@@ -1,12 +1,14 @@
 package com.example.glossaryapp.database
 
+import android.app.TaskStackBuilder
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.glossaryapp.models.CartProductData
+import com.example.glossaryapp.models.Product
 
-class DBHelper (context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, DATABASE_VERSION) {
+class DBHelper(context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, DATABASE_VERSION) {
     var database = writableDatabase
 
     companion object {
@@ -35,6 +37,7 @@ class DBHelper (context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, D
     }
 
     fun addProduct(cartProductData: CartProductData) {
+//        if (isItemInCart(product._id)) {
         var contentValues = ContentValues()
         contentValues.put(COLUMN_ID, cartProductData.id)
         contentValues.put(COLUMN_QUANTITY, cartProductData.quantity)
@@ -43,26 +46,52 @@ class DBHelper (context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, D
         contentValues.put(COLUMN_PRICE, cartProductData.price)
         contentValues.put(COLUMN_IMAGE, cartProductData.image)
         database.insert(TABLE_NAME, null, contentValues)
+//        }
     }
 
-//    fun updateProduct(product: Product) {
-//        val whereClause = "$COLUMN_ID = ?"
-//        val whereArgs = arrayOf(product._id)
-//        var contentValues = ContentValues()
-//
-//    }
+    fun updatePlusProduct(cartProductData: CartProductData) {
+        val whereClause = "$COLUMN_ID = ?"
+        val whereArgs = arrayOf(cartProductData.id)
+        var contentValues = ContentValues()
+        contentValues.put(COLUMN_QUANTITY, (cartProductData.quantity + 1))
+        database.update(TABLE_NAME, contentValues, whereClause, whereArgs)
+    }
 
-    fun deleteProduct (id: String) {
+    fun updateMinusProduct(cartProductData: CartProductData) {
+        if (cartProductData.quantity > 0) {
+            val whereClause = "$COLUMN_ID = ?"
+            val whereArgs = arrayOf(cartProductData.id)
+            var contentValues = ContentValues()
+            contentValues.put(COLUMN_QUANTITY, (cartProductData.quantity - 1))
+            database.update(TABLE_NAME, contentValues, whereClause, whereArgs)
+        }
+    }
+
+    fun isItemInCart(id: String): Boolean {
+        val query = "select * from $TABLE_NAME where $COLUMN_ID = ?"
+        val cursor = database.rawQuery(query, arrayOf(id))
+        var count = cursor.count
+        return count != 0
+    }
+
+    fun deleteProduct(id: String) {
         val whereClause = "$COLUMN_ID = ?"
         val whereArgs = arrayOf(id)
         database.delete(TABLE_NAME, whereClause, whereArgs)
     }
 
-    fun getProducts() : ArrayList<CartProductData> {
+    fun getProducts(): ArrayList<CartProductData> {
         var productList: ArrayList<CartProductData> = ArrayList()
-        var columns = arrayOf(COLUMN_ID, COLUMN_QUANTITY, COLUMN_MRP, COLUMN_PRODUCT_NAME, COLUMN_PRICE, COLUMN_IMAGE)
+        var columns = arrayOf(
+            COLUMN_ID,
+            COLUMN_QUANTITY,
+            COLUMN_MRP,
+            COLUMN_PRODUCT_NAME,
+            COLUMN_PRICE,
+            COLUMN_IMAGE
+        )
         var cursor = database.query(TABLE_NAME, columns, null, null, null, null, null)
-        if(cursor !=null && cursor.moveToFirst()) {
+        if (cursor != null && cursor.moveToFirst()) {
             do {
                 var id = cursor.getString(cursor.getColumnIndex(COLUMN_ID))
                 var quantity = cursor.getInt(cursor.getColumnIndex(COLUMN_QUANTITY))

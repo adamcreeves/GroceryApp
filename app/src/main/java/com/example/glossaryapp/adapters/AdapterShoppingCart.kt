@@ -16,11 +16,15 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row_adapter_shopping_cart.view.*
 import kotlinx.android.synthetic.main.row_category_adapter.view.*
 
-class AdapterShoppingCart (private var myContext: Context, private var myList: ArrayList<CartProductData>) :
+class AdapterShoppingCart(
+    private var myContext: Context,
+    private var myList: ArrayList<CartProductData>
+) :
     RecyclerView.Adapter<AdapterShoppingCart.myViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myViewHolder {
-        var view = LayoutInflater.from(myContext).inflate(R.layout.row_adapter_shopping_cart, parent, false)
+        var view = LayoutInflater.from(myContext)
+            .inflate(R.layout.row_adapter_shopping_cart, parent, false)
         return myViewHolder(view)
     }
 
@@ -45,7 +49,7 @@ class AdapterShoppingCart (private var myContext: Context, private var myList: A
             itemView.text_view_cart_quantity.text = cartProductData.quantity.toString()
             Picasso.get()
                 .load(cartProductData.image)
-                .resize(100,100)
+                .resize(100, 100)
                 .centerCrop()
                 .placeholder(R.drawable.image_loading)
                 .error(R.drawable.image_didnt_load)
@@ -56,9 +60,25 @@ class AdapterShoppingCart (private var myContext: Context, private var myList: A
                 myList.removeAt(position)
                 myContext.startActivity(Intent(myContext, ShoppingCartActivity::class.java))
             }
+            itemView.button_cart_plus_one.setOnClickListener {
+                var dbHelper = DBHelper(myContext)
+                dbHelper.updatePlusProduct(cartProductData)
+                itemView.text_view_cart_quantity.text = cartProductData.quantity.toString()
+                myContext.startActivity(Intent(myContext, ShoppingCartActivity::class.java))
+            }
+            itemView.button_cart_minus_one.setOnClickListener {
+                var dbHelper = DBHelper(myContext)
+                if (cartProductData.quantity == 1) {
+                    dbHelper.deleteProduct(cartProductData.id)
+                    myContext.startActivity(Intent(myContext, ShoppingCartActivity::class.java))
+                } else {
+                    dbHelper.updateMinusProduct(cartProductData)
+                    itemView.text_view_cart_quantity.text = cartProductData.quantity.toString()
+                    myContext.startActivity(Intent(myContext, ShoppingCartActivity::class.java))
+                }
+            }
         }
     }
-
 
 
 }

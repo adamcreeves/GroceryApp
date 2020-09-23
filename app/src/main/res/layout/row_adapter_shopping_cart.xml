@@ -19,8 +19,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="15dp"
         android:orientation="vertical">
 
         <TextView
@@ -57,29 +57,41 @@
                 android:textStyle="italic" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Quantity: "
-                android:layout_toLeftOf="@+id/text_view_cart_quantity"
-                android:textColor="#fff"
-                android:textSize="13dp"
-                android:textStyle="italic" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <Button
+                android:id="@+id/button_cart_minus_one"
+                android:layout_width="35dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:text="-" />
 
             <TextView
                 android:id="@+id/text_view_cart_quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="Number"
+                android:layout_weight="1"
+                android:text="0"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:textColor="#fff"
                 android:textSize="13dp"
-                android:textStyle="italic" />
-        </RelativeLayout>
+                android:textStyle="bold" />
+            <Button
+                android:id="@+id/button_cart_plus_one"
+                android:layout_width="35dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:text="+" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
@@ -87,8 +99,8 @@
         android:id="@+id/button_cart_delete"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
+        android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"
-        android:layout_gravity="right"
         android:text="Delete"
         android:textSize="8dp" />
 

@@ -31,8 +31,9 @@ class ShoppingCartActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         var toolbar = toolbar
-        toolbar.title = "RäGN Home"
+        toolbar.title = "Your Cart"
         setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -48,6 +49,12 @@ class ShoppingCartActivity : AppCompatActivity() {
                 "You're already in your cart, my dude",
                 Toast.LENGTH_SHORT
             ).show()
+            R.id.action_home -> startActivity(
+                Intent(
+                    applicationContext,
+                    HomeActivity::class.java
+                )
+            )
             R.id.action_settings -> Toast.makeText(
                 applicationContext,
                 "You just clicked on Settings. Great work!",

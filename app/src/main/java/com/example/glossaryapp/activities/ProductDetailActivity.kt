@@ -84,6 +84,12 @@ class ProductDetailActivity : AppCompatActivity() {
                     ShoppingCartActivity::class.java
                 )
             )
+            R.id.action_home -> startActivity(
+                Intent(
+                    applicationContext,
+                    HomeActivity::class.java
+                )
+            )
             R.id.action_settings -> Toast.makeText(
                 applicationContext,
                 "You just clicked on Settings. Great work!",
