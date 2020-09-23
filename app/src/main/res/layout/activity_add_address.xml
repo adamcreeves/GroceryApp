@@ -13,7 +13,7 @@
         android:padding="10dp">
 
         <EditText
-            android:id="@+id/edit_text_street"
+            android:id="@+id/edit_text_street_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -35,35 +35,44 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="3">
 
             <EditText
-                android:id="@+id/edit_text_address_state"
+                android:id="@+id/edit_text_address_pincode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:hint="State"
+                android:hint="Pincode"
                 android:textColor="#eee"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <EditText
-                android:id="@+id/edit_text_address_zip"
+                android:id="@+id/edit_text_address_house_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:hint="Zip Code"
+                android:hint="House Number"
                 android:textColor="#eee"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
+            <EditText
+                android:id="@+id/edit_text_address_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:hint="Type"
+                android:textColor="#eee"
+                android:textSize="15dp" />
         </LinearLayout>
 
         <EditText
-            android:id="@+id/edit_text_address_country"
+            android:id="@+id/edit_text_address_user_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:hint="Country"
+            android:hint="Address Id"
             android:textColor="#eee"
             android:textSize="20dp" />
 

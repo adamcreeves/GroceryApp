@@ -63,14 +63,18 @@ class AddAddressActivity : AppCompatActivity() {
     private fun init() {
 
         button_save_address.setOnClickListener {
-            var street = edit_text_street.text.toString()
+            var pincode = edit_text_address_pincode.text.toString().toInt()
+            var streetName = edit_text_street_name.text.toString()
             var city = edit_text_address_city.text.toString()
-            var state = edit_text_address_state.text.toString()
-            var zip = edit_text_address_zip.text.toString()
-            var country = edit_text_address_country.text.toString()
+            var houseNo = edit_text_address_house_no.text.toString()
+            var type = edit_text_address_type.text.toString()
 
             var params = HashMap<String, String>()
-            params
+            params["pincode"] = pincode.toString()
+            params["streetName"] = streetName
+            params["city"] = city
+            params["houseNo"] = houseNo
+            params["type"] = type
 
             Toast.makeText(applicationContext, "New employee record successfully added!", Toast.LENGTH_SHORT).show()
             startActivity(Intent(applicationContext, AddressActivity::class.java))
