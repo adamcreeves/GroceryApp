@@ -5,33 +5,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.GridLayout
 import android.widget.Toast
-import androidx.recyclerview.widget.GridLayoutManager
 import com.example.glossaryapp.R
-import com.example.glossaryapp.adapters.AdapterShoppingCart
-import com.example.glossaryapp.database.DBHelper
-import com.example.glossaryapp.models.CartProductData
-import com.example.glossaryapp.models.Product
-import kotlinx.android.synthetic.main.activity_shopping_cart.*
+import kotlinx.android.synthetic.main.activity_add_address.*
 import kotlinx.android.synthetic.main.app_bar.*
 
-class ShoppingCartActivity : AppCompatActivity() {
-
-    lateinit var dbHelper: DBHelper
-    var myList: ArrayList<CartProductData> = ArrayList()
-    private var adapterShoppingCart: AdapterShoppingCart? = null
-
+class AddAddressActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_shopping_cart)
-        dbHelper = DBHelper(this)
+        setContentView(R.layout.activity_add_address)
         init()
     }
 
-    private fun setupToolbar() {
+    private fun setupToolBar() {
         var toolbar = toolbar
-        toolbar.title = "Your Cart"
+        toolbar.title = "Add New Address"
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
@@ -44,11 +32,12 @@ class ShoppingCartActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> finish()
-            R.id.action_cart -> Toast.makeText(
-                applicationContext,
-                "You're already in your cart, my dude",
-                Toast.LENGTH_SHORT
-            ).show()
+            R.id.action_cart -> startActivity(
+                Intent(
+                    applicationContext,
+                    ShoppingCartActivity::class.java
+                )
+            )
             R.id.action_home -> startActivity(
                 Intent(
                     applicationContext,
@@ -70,23 +59,9 @@ class ShoppingCartActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        setupToolbar()
-        myList = dbHelper.getProducts()
-        Toast.makeText(applicationContext, "Your cart items are loading...", Toast.LENGTH_SHORT)
-            .show()
-
-        adapterShoppingCart = AdapterShoppingCart(this, myList)
-        recycler_view.layoutManager = GridLayoutManager(this, 1)
-        recycler_view.adapter = adapterShoppingCart
-        adapterShoppingCart?.setData(myList)
-        button_cart_to_checkout.setOnClickListener {
+        setupToolBar()
+        button_save_address.setOnClickListener {
             startActivity(Intent(applicationContext, AddressActivity::class.java))
         }
-    }
-
-        override fun onResume() {
-            super.onResume()
-            myList = dbHelper.getProducts()
-        adapterShoppingCart?.setData(myList)
     }
 }
