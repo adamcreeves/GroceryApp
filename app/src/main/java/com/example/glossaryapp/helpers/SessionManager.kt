@@ -8,7 +8,7 @@ class SessionManager(var myContext: Context) {
     private val FILE_NAME = "REGISTERED_USERS"
     private val KEY_TOKEN = "token"
     private val KEY_FIRST_NAME = "firstName"
-    private val KEY_USER_ID = "userId"
+    private val KEY_ID = "_id"
   //  private val KEY_FIRST_NAME = "firstName"
 
 
@@ -18,6 +18,7 @@ class SessionManager(var myContext: Context) {
     fun saveUserInfo(user: User) {
         editor.putString(KEY_FIRST_NAME, user.firstName)
         editor.putString(KEY_TOKEN, user.token)
+        editor.putString(KEY_ID, user._id)
         editor.commit()
 
     }

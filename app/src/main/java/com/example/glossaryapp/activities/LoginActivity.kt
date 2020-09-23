@@ -36,7 +36,6 @@ class LoginActivity : AppCompatActivity() {
             var loginPassword = edit_text_login_password.text.toString()
 
 
-
             var params = HashMap<String, String>()
             params["email"] = loginEmail
             params["password"] = loginPassword
@@ -47,12 +46,17 @@ class LoginActivity : AppCompatActivity() {
                     val gson = Gson()
                     var loginResponse = gson.fromJson(it.toString(), LoginResponse::class.java)
                     sessionManager.saveUserInfo(loginResponse.user)
-                    Toast.makeText(applicationContext, "Login successful", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Login successful", Toast.LENGTH_SHORT)
+                        .show()
                     Log.d("abc", sessionManager.getUserInfo().toString())
                     startActivity(Intent(this, HomeActivity::class.java))
-            },
+                },
                 {
-                    Toast.makeText(applicationContext, "Username or password incorrect", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        applicationContext,
+                        "Username or password incorrect",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 })
 //
 

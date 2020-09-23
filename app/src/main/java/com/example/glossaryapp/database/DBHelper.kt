@@ -1,12 +1,11 @@
 package com.example.glossaryapp.database
 
-import android.app.TaskStackBuilder
+
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.glossaryapp.models.CartProductData
-import com.example.glossaryapp.models.Product
 
 class DBHelper(context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, DATABASE_VERSION) {
     var database = writableDatabase

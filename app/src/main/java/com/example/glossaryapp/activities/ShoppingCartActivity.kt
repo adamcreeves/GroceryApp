@@ -84,9 +84,9 @@ class ShoppingCartActivity : AppCompatActivity() {
         }
     }
 
-        override fun onResume() {
-            super.onResume()
-            myList = dbHelper.getProducts()
+    override fun onResume() {
+        super.onResume()
+        myList = dbHelper.getProducts()
         adapterShoppingCart?.setData(myList)
     }
 }

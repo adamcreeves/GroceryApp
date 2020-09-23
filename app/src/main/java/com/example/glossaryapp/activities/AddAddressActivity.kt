@@ -11,9 +11,11 @@ import kotlinx.android.synthetic.main.activity_add_address.*
 import kotlinx.android.synthetic.main.app_bar.*
 
 class AddAddressActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_address)
+
         init()
     }
 
@@ -59,8 +61,18 @@ class AddAddressActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        setupToolBar()
+
         button_save_address.setOnClickListener {
+            var street = edit_text_street.text.toString()
+            var city = edit_text_address_city.text.toString()
+            var state = edit_text_address_state.text.toString()
+            var zip = edit_text_address_zip.text.toString()
+            var country = edit_text_address_country.text.toString()
+
+            var params = HashMap<String, String>()
+            params
+
+            Toast.makeText(applicationContext, "New employee record successfully added!", Toast.LENGTH_SHORT).show()
             startActivity(Intent(applicationContext, AddressActivity::class.java))
         }
     }

@@ -39,19 +39,29 @@ class RegisterActivity : AppCompatActivity() {
             params["mobile"] = mobile
 
             var jsonObject = JSONObject(params as Map<*, *>)
-            if(password == confirmPassword){
+            if (password == confirmPassword) {
                 var request = JsonObjectRequest(
                     Request.Method.POST, Endpoints.getRegister(), jsonObject, {
-                    Toast.makeText(applicationContext, "Registration successful", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, LoginActivity::class.java))
-                },
+                        Toast.makeText(
+                            applicationContext,
+                            "Registration successful",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        startActivity(Intent(this, LoginActivity::class.java))
+                    },
                     {
 
                     })
                 Volley.newRequestQueue(this).add(request)
             } else {
-                Toast.makeText(applicationContext, "Your password doesn't match", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    applicationContext,
+                    "Your password doesn't match",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
 }
+
+//    user id: 5f64cb7eaf18dc0017608550

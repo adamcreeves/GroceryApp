@@ -24,7 +24,7 @@ class AdapterFragment(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         return myTitleList[position]
     }
 
-    fun addFragment(subCategory: SubCategory){
+    fun addFragment(subCategory: SubCategory) {
         myTitleList.add(subCategory.subName)
         myFragmentList.add(ProductListFragment.newInstance(subCategory.subId))
     }
