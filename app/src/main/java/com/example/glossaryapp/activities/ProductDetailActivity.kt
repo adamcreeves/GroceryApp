@@ -6,20 +6,14 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import com.android.volley.Request
-import com.android.volley.toolbox.StringRequest
 import com.example.glossaryapp.R
 import com.example.glossaryapp.app.Configure
-import com.example.glossaryapp.app.Endpoints
 import com.example.glossaryapp.database.DBHelper
+import com.example.glossaryapp.models.CartProductData
 import com.example.glossaryapp.models.Product
-import com.example.glossaryapp.models.ProductResults
-import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_product_detail.*
 import kotlinx.android.synthetic.main.app_bar.*
-import kotlinx.android.synthetic.main.row_subcategory_adapter.view.*
-import java.lang.reflect.Method
 
 class ProductDetailActivity : AppCompatActivity() {
     var product: Product? = null
@@ -34,24 +28,42 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     private fun init() {
-//        setupToolBar()
+        setupToolBar()
         text_view_details_product_name.text = product?.productName
         text_view_details_description.text = product?.description
         text_view_details_price.text = product?.price.toString()
         Picasso.get()
             .load(Configure.IMAGE_URL + product?.image)
-            .resize(200,200)
+            .resize(200, 200)
             .centerCrop()
             .placeholder(R.drawable.image_loading)
             .error(R.drawable.image_didnt_load)
             .into(image_view_details_image)
         button_add_to_cart.setOnClickListener {
-            dbHelper.addProduct(Product(product!!._id, null, product!!.description, product!!.image,null,null, product!!.price, product!!.productName,null,null,null,null,))
-            Toast.makeText(applicationContext, "This item has been added to your cart", Toast.LENGTH_SHORT).show()
+            if (product!!.quantity > 0) {
+                var id = product!!._id
+                var quantity = 1
+                var mrp = product!!.mrp
+                var productName = product!!.productName
+                var price = product!!.price
+                var image = Configure.IMAGE_URL + product!!.image
+                dbHelper.addProduct(CartProductData(id, quantity, mrp, productName, price, image))
+
+//            startActivity(Intent(applicationContext, ShoppingCartActivity::class.java))
+                Toast.makeText(
+                    applicationContext,
+                    "This item has been added to your cart",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else Toast.makeText(
+                applicationContext,
+                "This item is sold out",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
-        private fun setupToolBar() {
+    private fun setupToolBar() {
         var toolbar = toolbar
         toolbar.title = "Selected Item"
         setSupportActionBar(toolbar)
@@ -64,10 +76,24 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.action_cart -> startActivity(Intent(applicationContext, ShoppingCartActivity::class.java))
-            R.id.action_settings -> Toast.makeText(applicationContext, "You just clicked on Settings. Great work!", Toast.LENGTH_SHORT).show()
-            R.id.action_profile -> Toast.makeText(applicationContext, "You just clicked on Profile. Great work!", Toast.LENGTH_SHORT).show()
+        when (item.itemId) {
+            android.R.id.home -> finish()
+            R.id.action_cart -> startActivity(
+                Intent(
+                    applicationContext,
+                    ShoppingCartActivity::class.java
+                )
+            )
+            R.id.action_settings -> Toast.makeText(
+                applicationContext,
+                "You just clicked on Settings. Great work!",
+                Toast.LENGTH_SHORT
+            ).show()
+            R.id.action_profile -> Toast.makeText(
+                applicationContext,
+                "You just clicked on Profile. Great work!",
+                Toast.LENGTH_SHORT
+            ).show()
         }
         return true
     }

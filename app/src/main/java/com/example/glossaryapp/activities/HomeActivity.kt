@@ -32,7 +32,7 @@ class HomeActivity : AppCompatActivity() {
         init()
     }
 
-    private fun setupToolbar(){
+    private fun setupToolbar() {
         var toolbar = toolbar
         toolbar.title = "RäGN Home"
         setSupportActionBar(toolbar)
@@ -44,10 +44,23 @@ class HomeActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.action_cart -> startActivity(Intent(applicationContext, ShoppingCartActivity::class.java))
-            R.id.action_settings -> Toast.makeText(applicationContext, "You just clicked on Settings. Great work!", Toast.LENGTH_SHORT).show()
-            R.id.action_profile -> Toast.makeText(applicationContext, "You just clicked on Profile. Great work!", Toast.LENGTH_SHORT).show()
+        when (item.itemId) {
+            R.id.action_cart -> startActivity(
+                Intent(
+                    applicationContext,
+                    ShoppingCartActivity::class.java
+                )
+            )
+            R.id.action_settings -> Toast.makeText(
+                applicationContext,
+                "You just clicked on Settings. Great work!",
+                Toast.LENGTH_SHORT
+            ).show()
+            R.id.action_profile -> Toast.makeText(
+                applicationContext,
+                "You just clicked on Profile. Great work!",
+                Toast.LENGTH_SHORT
+            ).show()
         }
         return true
     }
@@ -56,12 +69,12 @@ class HomeActivity : AppCompatActivity() {
         setupToolbar()
         getData()
         adapterCategory = AdapterCategory(this)
-        recycler_view.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        recycler_view.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recycler_view.adapter = adapterCategory
 
         image_view_home_headline_image.setImageResource(R.drawable.app_logo)
     }
-
 
 
     private fun getData() {
@@ -70,7 +83,11 @@ class HomeActivity : AppCompatActivity() {
             var categoryResult = gson.fromJson(it, CategoryResult::class.java)
             adapterCategory.setData(categoryResult.data)
 
-            Toast.makeText(applicationContext, "Category Images are Loading...", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                applicationContext,
+                "Category Images are Loading...",
+                Toast.LENGTH_SHORT
+            ).show()
             progress_bar.visibility = View.GONE
         },
             {

@@ -10,38 +10,14 @@ import com.example.glossaryapp.R
 import com.example.glossaryapp.activities.ShoppingCartActivity
 import com.example.glossaryapp.app.Configure
 import com.example.glossaryapp.database.DBHelper
+import com.example.glossaryapp.models.CartProductData
 import com.example.glossaryapp.models.Product
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row_adapter_shopping_cart.view.*
 import kotlinx.android.synthetic.main.row_category_adapter.view.*
 
-class AdapterShoppingCart (private var myContext: Context, private var myList: ArrayList<Product>) :
+class AdapterShoppingCart (private var myContext: Context, private var myList: ArrayList<CartProductData>) :
     RecyclerView.Adapter<AdapterShoppingCart.myViewHolder>() {
-
-    inner class myViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(product: Product, position: Int) {
-            itemView.text_view_cart_product_name.text = product.productName
-            itemView.text_view_cart_price.text = product.price.toString()
-            Picasso.get()
-                .load(Configure.IMAGE_URL + product.image)
-                .resize(100,100)
-                .centerCrop()
-                .placeholder(R.drawable.image_loading)
-                .error(R.drawable.image_didnt_load)
-                .into(itemView.image_view_cart_image)
-            itemView.button_cart_delete.setOnClickListener {
-                var dbHelper = DBHelper(myContext)
-                dbHelper.deleteProduct(product._id)
-                myList.removeAt(position)
-                myContext.startActivity(Intent(myContext, ShoppingCartActivity::class.java))
-            }
-        }
-    }
-
-    fun setData(list: ArrayList<Product>) {
-        myList = list
-        notifyDataSetChanged()
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myViewHolder {
         var view = LayoutInflater.from(myContext).inflate(R.layout.row_adapter_shopping_cart, parent, false)
@@ -49,12 +25,40 @@ class AdapterShoppingCart (private var myContext: Context, private var myList: A
     }
 
     override fun onBindViewHolder(holder: myViewHolder, position: Int) {
-        var product: Product = myList[position]
-        holder.bind(product, position)
+        var cartProductData = myList[position]
+        holder.bind(cartProductData, position)
     }
 
     override fun getItemCount(): Int {
         return myList.size
     }
+
+    fun setData(list: ArrayList<CartProductData>) {
+        myList = list
+        notifyDataSetChanged()
+    }
+
+    inner class myViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(cartProductData: CartProductData, position: Int) {
+            itemView.text_view_cart_product_name.text = cartProductData.productName
+            itemView.text_view_cart_price.text = cartProductData.price.toString()
+            itemView.text_view_cart_quantity.text = cartProductData.quantity.toString()
+            Picasso.get()
+                .load(cartProductData.image)
+                .resize(100,100)
+                .centerCrop()
+                .placeholder(R.drawable.image_loading)
+                .error(R.drawable.image_didnt_load)
+                .into(itemView.image_view_cart_image)
+            itemView.button_cart_delete.setOnClickListener {
+                var dbHelper = DBHelper(myContext)
+                dbHelper.deleteProduct(cartProductData.id)
+                myList.removeAt(position)
+                myContext.startActivity(Intent(myContext, ShoppingCartActivity::class.java))
+            }
+        }
+    }
+
+
 
 }
