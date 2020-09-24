@@ -35,6 +35,12 @@
             android:textColor="#000"
             android:textSize="25dp" />
 
+            <RadioButton
+                android:id="@+id/radio_button_selected_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp" />
+
         </LinearLayout>
             <TextView
                 android:id="@+id/text_view_address_city"

@@ -58,15 +58,47 @@
                 android:textSize="15dp" />
 
         </LinearLayout>
-        <EditText
-            android:id="@+id/edit_text_address_type"
-            android:layout_width="match_parent"
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:hint="Home or Office?"
-            android:textColor="#eee"
-            android:textSize="15dp" />
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type: "
+                android:textColor="#000"
+                android:textSize="22dp" />
+
+            <RadioButton
+                android:id="@+id/radio_button_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="Home"
+                android:textSize="22dp" />
+
+            <RadioButton
+                android:id="@+id/radio_button_office"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="Office"
+                android:textSize="22dp" />
+
+            <RadioButton
+                android:id="@+id/radio_button_other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="Other"
+                android:textSize="22dp" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/button_save_address"
@@ -76,6 +108,5 @@
             android:text="Save Address" />
 
     </LinearLayout>
-
 
 </LinearLayout>
