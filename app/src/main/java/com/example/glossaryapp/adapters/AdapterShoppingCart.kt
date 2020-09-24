@@ -56,23 +56,31 @@ class AdapterShoppingCart(
                 var dbHelper = DBHelper(myContext)
                 dbHelper.deleteProduct(cartProductData.id)
                 myList.removeAt(position)
-                myContext.startActivity(Intent(myContext, ShoppingCartActivity::class.java))
+                notifyDataSetChanged()
+
             }
             itemView.button_cart_plus_one.setOnClickListener {
                 var dbHelper = DBHelper(myContext)
                 dbHelper.updatePlusProduct(cartProductData)
+                cartProductData.quantity += 1
+                notifyDataSetChanged()
                 itemView.text_view_cart_quantity.text = cartProductData.quantity.toString()
-                myContext.startActivity(Intent(myContext, ShoppingCartActivity::class.java))
+
             }
             itemView.button_cart_minus_one.setOnClickListener {
                 var dbHelper = DBHelper(myContext)
                 if (cartProductData.quantity == 1) {
                     dbHelper.deleteProduct(cartProductData.id)
-                    myContext.startActivity(Intent(myContext, ShoppingCartActivity::class.java))
+                    myList.removeAt(position)
+                    notifyDataSetChanged()
+                    dbHelper.deleteProduct(cartProductData.id)
                 } else {
                     dbHelper.updateMinusProduct(cartProductData)
+
+                    cartProductData.quantity -= 1
+                    notifyDataSetChanged()
                     itemView.text_view_cart_quantity.text = cartProductData.quantity.toString()
-                    myContext.startActivity(Intent(myContext, ShoppingCartActivity::class.java))
+
                 }
             }
         }

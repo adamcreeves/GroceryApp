@@ -73,7 +73,7 @@ class ShoppingCartActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "You just logged out :(", Toast.LENGTH_SHORT)
                     .show()
                 sessionManager.logout()
-                startActivity(Intent(applicationContext, StartActivity::class.java))
+                startActivity(Intent(applicationContext, HomeActivity::class.java))
             }
         }
         return true
@@ -90,7 +90,11 @@ class ShoppingCartActivity : AppCompatActivity() {
         recycler_view.adapter = adapterShoppingCart
         adapterShoppingCart?.setData(myList)
         button_cart_to_checkout.setOnClickListener {
-            startActivity(Intent(applicationContext, AddressActivity::class.java))
+            if (sessionManager.getQuickLogin()) {
+                startActivity(Intent(this, AddressActivity::class.java))
+            } else {
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
         }
     }
 

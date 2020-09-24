@@ -73,7 +73,7 @@ class AddressActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "You just logged out :(", Toast.LENGTH_SHORT)
                     .show()
                 sessionManager.logout()
-                startActivity(Intent(applicationContext, StartActivity::class.java))
+                startActivity(Intent(applicationContext, HomeActivity::class.java))
             }
         }
         return true
