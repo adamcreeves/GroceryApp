@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.glossaryapp.R
 import com.example.glossaryapp.adapters.AdapterShoppingCart
 import com.example.glossaryapp.database.DBHelper
+import com.example.glossaryapp.helpers.SessionManager
 import com.example.glossaryapp.models.CartProductData
 import com.example.glossaryapp.models.Product
 import kotlinx.android.synthetic.main.activity_shopping_cart.*
@@ -20,11 +21,13 @@ class ShoppingCartActivity : AppCompatActivity() {
 
     lateinit var dbHelper: DBHelper
     var myList: ArrayList<CartProductData> = ArrayList()
+    lateinit var sessionManager: SessionManager
     private var adapterShoppingCart: AdapterShoppingCart? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shopping_cart)
+        sessionManager = SessionManager(this)
         dbHelper = DBHelper(this)
         init()
     }
@@ -65,6 +68,11 @@ class ShoppingCartActivity : AppCompatActivity() {
                 "You just clicked on Profile. Great work!",
                 Toast.LENGTH_SHORT
             ).show()
+            R.id.action_logout -> {
+                Toast.makeText(applicationContext, "You just logged out :(", Toast.LENGTH_SHORT).show()
+                sessionManager.logout()
+                startActivity(Intent(applicationContext, StartActivity::class.java))
+            }
         }
         return true
     }

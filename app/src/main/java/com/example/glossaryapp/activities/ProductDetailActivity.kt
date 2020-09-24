@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.example.glossaryapp.R
 import com.example.glossaryapp.app.Configure
 import com.example.glossaryapp.database.DBHelper
+import com.example.glossaryapp.helpers.SessionManager
 import com.example.glossaryapp.models.CartProductData
 import com.example.glossaryapp.models.Product
 import com.squareup.picasso.Picasso
@@ -18,10 +19,12 @@ import kotlinx.android.synthetic.main.app_bar.*
 class ProductDetailActivity : AppCompatActivity() {
     var product: Product? = null
     lateinit var dbHelper: DBHelper
+    lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_detail)
+        sessionManager = SessionManager(this)
         product = intent.getSerializableExtra(Product.KEY_PRODUCT) as Product
         dbHelper = DBHelper(this)
         init()
@@ -100,6 +103,11 @@ class ProductDetailActivity : AppCompatActivity() {
                 "You just clicked on Profile. Great work!",
                 Toast.LENGTH_SHORT
             ).show()
+            R.id.action_logout -> {
+                Toast.makeText(applicationContext, "You just logged out :(", Toast.LENGTH_SHORT).show()
+                sessionManager.logout()
+                startActivity(Intent(applicationContext, StartActivity::class.java))
+            }
         }
         return true
     }

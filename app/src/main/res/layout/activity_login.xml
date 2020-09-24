@@ -26,8 +26,7 @@
             android:layout_margin="5dp"
             android:background="@color/colorPrimary"
             android:hint="Email"
-            android:padding="10dp"
-            android:text="adam@adam.com" />
+            android:padding="10dp" />
 
         <EditText
             android:id="@+id/edit_text_login_password"
@@ -37,8 +36,7 @@
             android:background="@color/colorPrimary"
             android:hint="Password"
             android:inputType="textPassword"
-            android:padding="10dp"
-            android:text="1234567" />
+            android:padding="10dp" />
 
         <Button
             android:id="@+id/button_login_submit"

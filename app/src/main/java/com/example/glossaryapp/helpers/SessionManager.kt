@@ -36,5 +36,10 @@ class SessionManager(var myContext: Context) {
         return token !=null
     }
 
+    fun logout() {
+        editor.clear()
+        editor.commit()
+    }
+
 
 }

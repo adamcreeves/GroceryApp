@@ -12,6 +12,7 @@ import com.android.volley.toolbox.Volley
 import com.example.glossaryapp.R
 import com.example.glossaryapp.adapters.AdapterFragment
 import com.example.glossaryapp.app.Endpoints
+import com.example.glossaryapp.helpers.SessionManager
 import com.example.glossaryapp.models.Category
 import com.example.glossaryapp.models.SubCategoriesResult
 import com.example.glossaryapp.models.SubCategory
@@ -23,13 +24,14 @@ class SubCategoryActivity : AppCompatActivity() {
 
     var myList: ArrayList<SubCategory> = ArrayList()
     lateinit var adapterFragment: AdapterFragment
+    lateinit var sessionManager: SessionManager
     var category: Category? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sub_category)
+        sessionManager = SessionManager(this)
         category = intent.getSerializableExtra(Category.KEY_CATEGORY) as Category
-
         init()
     }
 
@@ -70,6 +72,12 @@ class SubCategoryActivity : AppCompatActivity() {
                 "You just clicked on Profile. Great work!",
                 Toast.LENGTH_SHORT
             ).show()
+            R.id.action_logout -> {
+                Toast.makeText(applicationContext, "You just logged out :(", Toast.LENGTH_SHORT)
+                    .show()
+                sessionManager.logout()
+                startActivity(Intent(applicationContext, StartActivity::class.java))
+            }
         }
         return true
     }

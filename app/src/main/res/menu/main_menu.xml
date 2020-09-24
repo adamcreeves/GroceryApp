@@ -25,4 +25,10 @@
         android:title="My Cart"
         android:icon="@drawable/ic_baseline_shopping_cart_24"
         />
+    <item
+        app:showAsAction="never"
+        android:id="@+id/action_logout"
+        android:title="Logout"
+        android:icon="@drawable/ic_baseline_logout_24"
+        />
 </menu>
