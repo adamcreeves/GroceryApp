@@ -10,6 +10,7 @@ class Endpoints {
         private const val URL_SUBCATEGORY = "subcategory"
         private const val URL_PRODUCTS_BY_SUB = "products/sub"
         private const val URL_PRODUCT = "products"
+        private const val URL_ADDRESS = "address"
 
 
         fun getLogin() : String {
@@ -22,6 +23,10 @@ class Endpoints {
 
         fun getCategory() : String {
             return Configure.BASE_URL + URL_CATEGORY
+        }
+
+        fun getAddress() : String {
+            return Configure.BASE_URL + URL_ADDRESS
         }
 
         fun getSubcategoryByCatId(catId: Int) : String {

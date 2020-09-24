@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="2">
 
             <EditText
                 android:id="@+id/edit_text_address_pincode"
@@ -56,25 +56,17 @@
                 android:hint="House Number"
                 android:textColor="#eee"
                 android:textSize="15dp" />
-            <EditText
-                android:id="@+id/edit_text_address_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:hint="Type"
-                android:textColor="#eee"
-                android:textSize="15dp" />
-        </LinearLayout>
 
+        </LinearLayout>
         <EditText
-            android:id="@+id/edit_text_address_user_id"
+            android:id="@+id/edit_text_address_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:hint="Address Id"
+            android:layout_weight="1"
+            android:hint="Home or Office?"
             android:textColor="#eee"
-            android:textSize="20dp" />
+            android:textSize="15dp" />
 
         <Button
             android:id="@+id/button_save_address"

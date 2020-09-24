@@ -51,7 +51,8 @@ class RegisterActivity : AppCompatActivity() {
                     },
                     {
 
-                    })
+                    }
+                )
                 Volley.newRequestQueue(this).add(request)
             } else {
                 Toast.makeText(

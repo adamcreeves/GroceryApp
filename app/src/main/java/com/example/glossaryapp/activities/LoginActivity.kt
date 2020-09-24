@@ -49,7 +49,6 @@ class LoginActivity : AppCompatActivity() {
                     sessionManager.saveUserLogin(loginResponse.token)
                     Toast.makeText(applicationContext, "Login successful", Toast.LENGTH_SHORT)
                         .show()
-                    Log.d("abc", sessionManager.getUserInfo().toString())
                     startActivity(Intent(this, HomeActivity::class.java))
                 },
                 {

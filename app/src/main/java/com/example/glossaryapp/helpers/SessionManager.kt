@@ -25,10 +25,10 @@ class SessionManager(var myContext: Context) {
         editor.commit()
 
     }
-    fun getUserInfo() : User {
+    fun getUserId() : String {
         var name = sharedPreferences.getString(KEY_FIRST_NAME, null)
         var userId = sharedPreferences.getString(KEY_FIRST_NAME, null)
-        return User(userId, null, name, null, null)
+        return userId.toString()
     }
 
     fun getQuickLogin() : Boolean {
