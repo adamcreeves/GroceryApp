@@ -6,13 +6,24 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.Request
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.example.glossaryapp.R
+import com.example.glossaryapp.adapters.AdapterAddress
+import com.example.glossaryapp.app.Endpoints
 import com.example.glossaryapp.helpers.SessionManager
+import com.example.glossaryapp.models.Address
+import com.example.glossaryapp.models.AddressResult
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_address.*
 import kotlinx.android.synthetic.main.app_bar.*
 
 class AddressActivity : AppCompatActivity() {
     lateinit var sessionManager: SessionManager
+    var myList: ArrayList<Address> = ArrayList()
+    var adapterAddress: AdapterAddress? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +70,8 @@ class AddressActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT
             ).show()
             R.id.action_logout -> {
-                Toast.makeText(applicationContext, "You just logged out :(", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "You just logged out :(", Toast.LENGTH_SHORT)
+                    .show()
                 sessionManager.logout()
                 startActivity(Intent(applicationContext, StartActivity::class.java))
             }
@@ -68,9 +80,29 @@ class AddressActivity : AppCompatActivity() {
     }
 
     private fun init() {
+        Toast.makeText(this, "Your saved addresses are loading...", Toast.LENGTH_SHORT).show()
         setupToolBar()
+        getData()
+        adapterAddress = AdapterAddress(this, myList)
+        recycler_view_addresses.layoutManager = LinearLayoutManager(this)
+        recycler_view_addresses.adapter = adapterAddress
         button_add_new_address.setOnClickListener {
             startActivity(Intent(applicationContext, AddAddressActivity::class.java))
         }
+    }
+
+    private fun getData() {
+        var userId = sessionManager.getUserId()
+        var request = StringRequest(Request.Method.GET, Endpoints.getAddress(userId), {
+            var gson = Gson()
+            var addressResult = gson.fromJson(it, AddressResult::class.java)
+            myList.addAll(addressResult.data)
+            adapterAddress?.setData(myList)
+            },
+            {
+
+            }
+        )
+        Volley.newRequestQueue(this).add(request)
     }
 }

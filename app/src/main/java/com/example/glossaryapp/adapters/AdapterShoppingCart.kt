@@ -8,13 +8,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.glossaryapp.R
 import com.example.glossaryapp.activities.ShoppingCartActivity
-import com.example.glossaryapp.app.Configure
 import com.example.glossaryapp.database.DBHelper
+import com.example.glossaryapp.models.Address
 import com.example.glossaryapp.models.CartProductData
-import com.example.glossaryapp.models.Product
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row_adapter_shopping_cart.view.*
-import kotlinx.android.synthetic.main.row_category_adapter.view.*
 
 class AdapterShoppingCart(
     private var myContext: Context,

@@ -29,6 +29,10 @@ class Endpoints {
             return Configure.BASE_URL + URL_ADDRESS
         }
 
+        fun getAddress(userId: String): String {
+            return Configure.BASE_URL + URL_ADDRESS + "/$userId"
+        }
+
         fun getSubcategoryByCatId(catId: Int) : String {
             return "${Configure.BASE_URL + URL_SUBCATEGORY}/$catId"
         }
