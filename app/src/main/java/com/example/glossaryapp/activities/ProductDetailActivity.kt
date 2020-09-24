@@ -32,6 +32,7 @@ class ProductDetailActivity : AppCompatActivity() {
 
     private fun init() {
         setupToolBar()
+        var quantity = 0
         text_view_details_product_name.text = product?.productName
         text_view_details_description.text = product?.description
         text_view_details_price.text = product?.price.toString()
@@ -45,14 +46,12 @@ class ProductDetailActivity : AppCompatActivity() {
         button_add_to_cart.setOnClickListener {
             if (product!!.quantity > 0) {
                 var id = product!!._id
-                var quantity = 1
+                quantity += 1
                 var mrp = product!!.mrp
                 var productName = product!!.productName
                 var price = product!!.price
                 var image = Configure.IMAGE_URL + product!!.image
                 dbHelper.addProduct(CartProductData(id, quantity, mrp, productName, price, image))
-
-//            startActivity(Intent(applicationContext, ShoppingCartActivity::class.java))
                 Toast.makeText(
                     applicationContext,
                     "This item has been added to your cart",
@@ -104,7 +103,8 @@ class ProductDetailActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT
             ).show()
             R.id.action_logout -> {
-                Toast.makeText(applicationContext, "You just logged out :(", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "You just logged out :(", Toast.LENGTH_SHORT)
+                    .show()
                 sessionManager.logout()
                 startActivity(Intent(applicationContext, StartActivity::class.java))
             }
