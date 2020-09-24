@@ -3,6 +3,7 @@ package com.example.glossaryapp.database
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.DatabaseUtils
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.glossaryapp.models.CartProductData
@@ -36,16 +37,22 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, DA
     }
 
     fun addProduct(cartProductData: CartProductData) {
-//        if (isItemInCart(product._id)) {
-        var contentValues = ContentValues()
-        contentValues.put(COLUMN_ID, cartProductData.id)
-        contentValues.put(COLUMN_QUANTITY, cartProductData.quantity)
-        contentValues.put(COLUMN_MRP, cartProductData.mrp)
-        contentValues.put(COLUMN_PRODUCT_NAME, cartProductData.productName)
-        contentValues.put(COLUMN_PRICE, cartProductData.price)
-        contentValues.put(COLUMN_IMAGE, cartProductData.image)
-        database.insert(TABLE_NAME, null, contentValues)
-//        }
+        val numberOfItemInCart = DatabaseUtils.longForQuery(
+            database,
+            "select count (*) from $TABLE_NAME where $COLUMN_ID = '${cartProductData.id}'",
+            null
+        )
+
+        if (numberOfItemInCart < 1) {
+            var contentValues = ContentValues()
+            contentValues.put(COLUMN_ID, cartProductData.id)
+            contentValues.put(COLUMN_QUANTITY, cartProductData.quantity)
+            contentValues.put(COLUMN_MRP, cartProductData.mrp)
+            contentValues.put(COLUMN_PRODUCT_NAME, cartProductData.productName)
+            contentValues.put(COLUMN_PRICE, cartProductData.price)
+            contentValues.put(COLUMN_IMAGE, cartProductData.image)
+            database.insert(TABLE_NAME, null, contentValues)
+        } else updatePlusProduct(cartProductData)
     }
 
     fun updatePlusProduct(cartProductData: CartProductData) {

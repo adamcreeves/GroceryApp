@@ -3,6 +3,7 @@ package com.example.glossaryapp.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -75,7 +76,7 @@ class AddAddressActivity : AppCompatActivity() {
     }
 
     private fun init() {
-
+        setupToolBar()
         button_save_address.setOnClickListener {
             var pincode = edit_text_address_pincode.text.toString().toInt()
             var streetName = edit_text_street_name.text.toString()
@@ -83,8 +84,8 @@ class AddAddressActivity : AppCompatActivity() {
             var houseNo = edit_text_address_house_no.text.toString()
             var type = edit_text_address_type.text.toString()
             var userId = sessionManager.getUserId()
-            var params = HashMap<String, String>()
-            params["pincode"] = pincode.toString()
+            var params = HashMap<String, Any>()
+            params["pincode"] = pincode
             params["streetName"] = streetName
             params["city"] = city
             params["houseNo"] = houseNo
@@ -100,13 +101,14 @@ class AddAddressActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                     startActivity(Intent(this, AddressActivity::class.java))
+                    Log.d("abc", it.toString())
                 },
                 {
-
+                    Log.d("abc", it.message.toString())
                 }
             )
             Volley.newRequestQueue(this).add(request)
-
+            Log.d("abc", it.toString())
             Toast.makeText(
                 applicationContext,
                 "New employee record successfully added!",
