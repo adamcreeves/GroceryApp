@@ -13,3 +13,7 @@ App screenshots:
 [![Screen Shot 2020-09-21 at 8.13.05 PM](https://i.imgur.com/GZDPXuf.png)]
 [![Screen Shot 2020-09-21 at 8.26.04 PM](https://i.imgur.com/1tza8AB.png)]
 [![Screen Shot 2020-09-21 at 8.26.31 PM](https://i.imgur.com/dztWMaP.png)]
+[![Screen Shot 2020-09-23 at 7.41.44 PM](https://i.imgur.com/Elxjhs4.png)]
+[![Screen Shot 2020-09-23 at 7.41.57 PM](https://i.imgur.com/IdCqGAi.png)]
+[![Screen Shot 2020-09-23 at 7.42.13 PM](https://i.imgur.com/BR1QwAy.png)]
+[![Screen Shot 2020-09-23 at 7.42.34 PM](https://i.imgur.com/srIFDZQ.png)]
