@@ -78,14 +78,14 @@ class AddAddressActivity : AppCompatActivity() {
     private fun init() {
         setupToolBar()
         button_save_address.setOnClickListener {
-            var pincode = edit_text_address_pincode.text.toString().toInt()
+            var pincode = edit_text_address_pincode.text.toString()
             var streetName = edit_text_street_name.text.toString()
             var city = edit_text_address_city.text.toString()
             var houseNo = edit_text_address_house_no.text.toString()
             var type = edit_text_address_type.text.toString()
             var userId = sessionManager.getUserId()
             var params = HashMap<String, Any>()
-            params["pincode"] = pincode
+            params["pincode"] = pincode.toInt()
             params["streetName"] = streetName
             params["city"] = city
             params["houseNo"] = houseNo
@@ -108,7 +108,6 @@ class AddAddressActivity : AppCompatActivity() {
                 }
             )
             Volley.newRequestQueue(this).add(request)
-            Log.d("abc", it.toString())
             Toast.makeText(
                 applicationContext,
                 "New employee record successfully added!",
