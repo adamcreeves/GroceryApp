@@ -27,6 +27,42 @@ class AddAddressActivity : AppCompatActivity() {
         sessionManager = SessionManager(this)
         init()
     }
+    
+    private fun init() {
+        setupToolBar()
+        button_save_address.setOnClickListener {
+            var pincode = edit_text_address_pincode.text.toString()
+            var streetName = edit_text_street_name.text.toString()
+            var city = edit_text_address_city.text.toString()
+            var houseNo = edit_text_address_house_no.text.toString()
+            var type = edit_text_address_type.text.toString()
+            var userId = sessionManager.getUserId()
+            var params = HashMap<String, Any>()
+            params["pincode"] = pincode.toInt()
+            params["streetName"] = streetName
+            params["city"] = city
+            params["houseNo"] = houseNo
+            params["type"] = type
+            params["userId"] = userId
+
+            var jsonObject = JSONObject(params as Map<*, *>)
+            var request = JsonObjectRequest(
+                Request.Method.POST, Endpoints.getAddress(), jsonObject, {
+                    Toast.makeText(
+                        applicationContext,
+                        "New address added successfully",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    startActivity(Intent(this, AddressActivity::class.java))
+                    Log.d("abc", it.toString())
+                },
+                {
+                    Log.d("abc", it.message.toString())
+                }
+            )
+            Volley.newRequestQueue(this).add(request)
+        }
+    }
 
     private fun setupToolBar() {
         var toolbar = toolbar
@@ -75,45 +111,4 @@ class AddAddressActivity : AppCompatActivity() {
         return true
     }
 
-    private fun init() {
-        setupToolBar()
-        button_save_address.setOnClickListener {
-            var pincode = edit_text_address_pincode.text.toString()
-            var streetName = edit_text_street_name.text.toString()
-            var city = edit_text_address_city.text.toString()
-            var houseNo = edit_text_address_house_no.text.toString()
-            var type = edit_text_address_type.text.toString()
-            var userId = sessionManager.getUserId()
-            var params = HashMap<String, Any>()
-            params["pincode"] = pincode.toInt()
-            params["streetName"] = streetName
-            params["city"] = city
-            params["houseNo"] = houseNo
-            params["type"] = type
-            params["userId"] = userId
-
-            var jsonObject = JSONObject(params as Map<*, *>)
-            var request = JsonObjectRequest(
-                Request.Method.POST, Endpoints.getAddress(), jsonObject, {
-                    Toast.makeText(
-                        applicationContext,
-                        "Registration successful",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    startActivity(Intent(this, AddressActivity::class.java))
-                    Log.d("abc", it.toString())
-                },
-                {
-                    Log.d("abc", it.message.toString())
-                }
-            )
-            Volley.newRequestQueue(this).add(request)
-            Toast.makeText(
-                applicationContext,
-                "New employee record successfully added!",
-                Toast.LENGTH_SHORT
-            ).show()
-            startActivity(Intent(applicationContext, AddressActivity::class.java))
-        }
-    }
 }
