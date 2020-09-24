@@ -32,6 +32,36 @@ class AddressActivity : AppCompatActivity() {
         init()
     }
 
+    private fun init() {
+        Toast.makeText(this, "Your saved addresses are loading...", Toast.LENGTH_SHORT).show()
+        setupToolBar()
+        getData()
+        adapterAddress = AdapterAddress(this, myList)
+        recycler_view_addresses.layoutManager = LinearLayoutManager(this)
+        recycler_view_addresses.adapter = adapterAddress
+        button_add_new_address.setOnClickListener {
+            startActivity(Intent(this, AddAddressActivity::class.java))
+        }
+        button_to_payment.setOnClickListener {
+            startActivity(Intent(this, PaymentActivity::class.java))
+        }
+    }
+
+    private fun getData() {
+        var userId = sessionManager.getUserId()
+        var request = StringRequest(Request.Method.GET, Endpoints.getAddress(userId), {
+            var gson = Gson()
+            var addressResult = gson.fromJson(it, AddressResult::class.java)
+            myList.addAll(addressResult.data)
+            adapterAddress?.setData(myList)
+        },
+            {
+
+            }
+        )
+        Volley.newRequestQueue(this).add(request)
+    }
+
     private fun setupToolBar() {
         var toolbar = toolbar
         toolbar.title = "Select Shipping Address"
@@ -79,30 +109,4 @@ class AddressActivity : AppCompatActivity() {
         return true
     }
 
-    private fun init() {
-        Toast.makeText(this, "Your saved addresses are loading...", Toast.LENGTH_SHORT).show()
-        setupToolBar()
-        getData()
-        adapterAddress = AdapterAddress(this, myList)
-        recycler_view_addresses.layoutManager = LinearLayoutManager(this)
-        recycler_view_addresses.adapter = adapterAddress
-        button_add_new_address.setOnClickListener {
-            startActivity(Intent(applicationContext, AddAddressActivity::class.java))
-        }
-    }
-
-    private fun getData() {
-        var userId = sessionManager.getUserId()
-        var request = StringRequest(Request.Method.GET, Endpoints.getAddress(userId), {
-            var gson = Gson()
-            var addressResult = gson.fromJson(it, AddressResult::class.java)
-            myList.addAll(addressResult.data)
-            adapterAddress?.setData(myList)
-            },
-            {
-
-            }
-        )
-        Volley.newRequestQueue(this).add(request)
-    }
 }

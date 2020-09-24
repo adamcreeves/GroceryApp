@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_start.*
 
 class StartActivity : AppCompatActivity() {
 
-    private val delayedTime: Long = 3000
+    private val delayedTime: Long = 1800
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

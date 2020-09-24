@@ -27,6 +27,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun init() {
+        setupToolBar()
         button_register_to_login.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }

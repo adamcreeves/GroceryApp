@@ -31,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun init() {
+        setupToolBar()
         button_login_to_register.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
