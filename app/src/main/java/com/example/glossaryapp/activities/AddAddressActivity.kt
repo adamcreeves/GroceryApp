@@ -1,11 +1,14 @@
 package com.example.glossaryapp.activities
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
@@ -20,6 +23,9 @@ import org.json.JSONObject
 
 class AddAddressActivity : AppCompatActivity() {
     lateinit var sessionManager: SessionManager
+    var radioGroup: RadioGroup? = null
+    lateinit var radioButton: RadioButton
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,12 +36,16 @@ class AddAddressActivity : AppCompatActivity() {
 
     private fun init() {
         setupToolBar()
+//        radioGroup = findViewById(R.id.radio_group_add_address)
+//        val selectedRadioButton: Int = radioGroup!!.checkedRadioButtonId
+//        radioButton = findViewById(selectedRadioButton)
+//        Toast.makeText(baseContext, radioButton.text, Toast.LENGTH_SHORT).show()
         button_save_address.setOnClickListener {
             var pincode = edit_text_address_pincode.text.toString()
             var streetName = edit_text_street_name.text.toString()
             var city = edit_text_address_city.text.toString()
             var houseNo = edit_text_address_house_no.text.toString()
-            var type = edit_text_address_type.text.toString()
+            var type = "Home"
             var userId = sessionManager.getUserId()
             Log.d("abc", userId)
             var params = HashMap<String, Any>()

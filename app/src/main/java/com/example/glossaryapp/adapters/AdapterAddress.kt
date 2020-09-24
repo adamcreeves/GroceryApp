@@ -15,6 +15,7 @@ class AdapterAddress(
 ) :
     RecyclerView.Adapter<AdapterAddress.myViewHolder>() {
 
+    private var mySelectedItem = -1
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -26,7 +27,7 @@ class AdapterAddress(
 
     override fun onBindViewHolder(holder: AdapterAddress.myViewHolder, position: Int) {
         var addressData = myList[position]
-        holder.bind(addressData, position)
+        holder.bind(addressData, position, mySelectedItem)
     }
 
     override fun getItemCount(): Int {
@@ -39,11 +40,12 @@ class AdapterAddress(
     }
 
     inner class myViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(addressData: Address, position: Int) {
+        fun bind(addressData: Address, position: Int, mySelectedItem: Int) {
             itemView.text_view_address_house_no.text = addressData.houseNo
             itemView.text_view_address_street_name.text = addressData.streetName
             itemView.text_view_address_city.text = addressData.city
             itemView.text_view_address_pincode.text = addressData.pincode.toString()
+//            if(mySelectedItem == -1 && position == 0)
             itemView.text_view_address_type.text = addressData.type
         }
     }
