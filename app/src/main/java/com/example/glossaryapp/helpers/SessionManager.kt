@@ -27,7 +27,7 @@ class SessionManager(var myContext: Context) {
     }
     fun getUserId() : String {
         var name = sharedPreferences.getString(KEY_FIRST_NAME, null)
-        var userId = sharedPreferences.getString(KEY_FIRST_NAME, null)
+        var userId = sharedPreferences.getString(KEY_ID, null)
         return userId.toString()
     }
 

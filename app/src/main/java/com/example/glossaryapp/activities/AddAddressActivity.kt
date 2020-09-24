@@ -27,7 +27,7 @@ class AddAddressActivity : AppCompatActivity() {
         sessionManager = SessionManager(this)
         init()
     }
-    
+
     private fun init() {
         setupToolBar()
         button_save_address.setOnClickListener {
@@ -37,6 +37,7 @@ class AddAddressActivity : AppCompatActivity() {
             var houseNo = edit_text_address_house_no.text.toString()
             var type = edit_text_address_type.text.toString()
             var userId = sessionManager.getUserId()
+            Log.d("abc", userId)
             var params = HashMap<String, Any>()
             params["pincode"] = pincode.toInt()
             params["streetName"] = streetName
@@ -47,20 +48,21 @@ class AddAddressActivity : AppCompatActivity() {
 
             var jsonObject = JSONObject(params as Map<*, *>)
             var request = JsonObjectRequest(
-                Request.Method.POST, Endpoints.getAddress(), jsonObject, {
+                Request.Method.POST, Endpoints.saveAddress(), jsonObject, {
                     Toast.makeText(
                         applicationContext,
                         "New address added successfully",
                         Toast.LENGTH_SHORT
                     ).show()
-                    startActivity(Intent(this, AddressActivity::class.java))
-                    Log.d("abc", it.toString())
+
+                    Log.d("abc", it.toString() + "Something else")
                 },
                 {
                     Log.d("abc", it.message.toString())
                 }
             )
             Volley.newRequestQueue(this).add(request)
+            finish()
         }
     }
 

@@ -25,7 +25,7 @@ class Endpoints {
             return Configure.BASE_URL + URL_CATEGORY
         }
 
-        fun getAddress() : String {
+        fun saveAddress() : String {
             return Configure.BASE_URL + URL_ADDRESS
         }
 
