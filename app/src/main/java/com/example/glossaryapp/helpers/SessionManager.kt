@@ -17,15 +17,23 @@ class SessionManager(var myContext: Context) {
 
     fun saveUserInfo(user: User) {
         editor.putString(KEY_FIRST_NAME, user.firstName)
-        editor.putString(KEY_TOKEN, user.token)
         editor.putString(KEY_ID, user._id)
+        editor.commit()
+    }
+    fun saveUserLogin(token: String) {
+        editor.putString(KEY_TOKEN, token)
         editor.commit()
 
     }
     fun getUserInfo() : User {
         var name = sharedPreferences.getString(KEY_FIRST_NAME, null)
-        var token = sharedPreferences.getString(KEY_TOKEN, "Signed in")
-        return User(null, null, name, null, null, token)
+        var userId = sharedPreferences.getString(KEY_FIRST_NAME, null)
+        return User(userId, null, name, null, null)
+    }
+
+    fun getQuickLogin() : Boolean {
+        var token = sharedPreferences.getString(KEY_TOKEN, null)
+        return token !=null
     }
 
 

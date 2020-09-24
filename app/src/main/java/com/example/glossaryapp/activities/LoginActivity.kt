@@ -46,6 +46,7 @@ class LoginActivity : AppCompatActivity() {
                     val gson = Gson()
                     var loginResponse = gson.fromJson(it.toString(), LoginResponse::class.java)
                     sessionManager.saveUserInfo(loginResponse.user)
+                    sessionManager.saveUserLogin(loginResponse.token)
                     Toast.makeText(applicationContext, "Login successful", Toast.LENGTH_SHORT)
                         .show()
                     Log.d("abc", sessionManager.getUserInfo().toString())
