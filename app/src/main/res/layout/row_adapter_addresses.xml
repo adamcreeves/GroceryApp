@@ -39,7 +39,8 @@
                 android:id="@+id/radio_button_selected_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp" />
+                android:layout_marginLeft="25dp"
+                android:layout_gravity="right"/>
 
         </LinearLayout>
             <TextView
