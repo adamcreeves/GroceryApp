@@ -58,40 +58,40 @@
         </RelativeLayout>
 
 
+    </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="125dp"
+        android:layout_marginTop="70dp"
+        android:layout_alignParentRight="true"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <Button
+            android:id="@+id/button_cart_minus_one"
+            android:layout_width="35dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:text="-" />
+
+        <TextView
+            android:id="@+id/text_view_cart_quantity"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3">
-
-            <Button
-                android:id="@+id/button_cart_minus_one"
-                android:layout_width="35dp"
-                android:layout_height="45dp"
-                android:layout_weight="1"
-                android:text="-" />
-
-            <TextView
-                android:id="@+id/text_view_cart_quantity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="0"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textColor="#fff"
-                android:textSize="13dp"
-                android:textStyle="bold" />
-            <Button
-                android:id="@+id/button_cart_plus_one"
-                android:layout_width="35dp"
-                android:layout_height="45dp"
-                android:layout_weight="1"
-                android:text="+" />
-
-        </LinearLayout>
-
+            android:layout_weight="1"
+            android:text="0"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:textSize="13dp"
+            android:textStyle="bold" />
+        <Button
+            android:id="@+id/button_cart_plus_one"
+            android:layout_width="35dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:text="+" />
 
     </LinearLayout>
 

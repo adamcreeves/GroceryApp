@@ -54,7 +54,7 @@ class ProductDetailActivity : AppCompatActivity() {
                 dbHelper.addProduct(CartProductData(id, quantity, mrp, productName, price, image))
                 Toast.makeText(
                     applicationContext,
-                    "This item has been added to your cart",
+                    "Item Added",
                     Toast.LENGTH_SHORT
                 ).show()
             } else Toast.makeText(

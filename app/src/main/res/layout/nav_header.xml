@@ -22,11 +22,12 @@
         android:text="Marty McFly" />
 
     <TextView
-        android:id="@+id/text_view_header_userId"
+        android:id="@+id/text_view_header_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="userId"
+        android:text="Email Address"
         android:textColor="#fff"
         android:textSize="18dp" />
+
 
 </LinearLayout>

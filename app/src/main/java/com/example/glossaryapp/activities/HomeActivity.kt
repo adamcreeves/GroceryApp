@@ -51,18 +51,16 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         myNavView = nav_view
 
         var firstName = sessionManager.getFirstName()
-        var userId = sessionManager.getUserId()
+        var email = sessionManager.getEmail()
         var myHeaderView = myNavView.getHeaderView(0)
 
         myHeaderView.text_view_header_firstName.text = firstName
-        myHeaderView.text_view_header_userId.text = userId
+        myHeaderView.text_view_header_email.text = email
 
         var myToggle = ActionBarDrawerToggle(this, myDrawerLayout, toolbar, 0, 0)
         myDrawerLayout.addDrawerListener(myToggle)
         myToggle.syncState()
-//        myNavView.setNavigationItemSelectedListener {
-//
-//        }
+        myNavView.setNavigationItemSelectedListener (this)
 
 
         adapterCategory = AdapterCategory(this)
@@ -119,8 +117,8 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.item_profile -> Toast.makeText(this, "You just clicked on your profile. Nice!", Toast.LENGTH_SHORT).show()
-            R.id.item_address -> startActivity(Intent(applicationContext, AddressActivity::class.java))
-            R.id.item_settings -> Toast.makeText(this, "You just clicked on settings. Nice!", Toast.LENGTH_SHORT).show()
+            R.id.item_address -> startActivity(Intent(this, AddressActivity::class.java))
+            R.id.item_orders -> Toast.makeText(this, "You just clicked on Orders. Nice!", Toast.LENGTH_SHORT).show()
             R.id.item_logout -> dialogLogout()
         }
         myDrawerLayout.closeDrawer(GravityCompat.START)

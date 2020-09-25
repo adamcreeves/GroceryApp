@@ -36,43 +36,50 @@ class AddAddressActivity : AppCompatActivity() {
 
     private fun init() {
         setupToolBar()
-//        radioGroup = findViewById(R.id.radio_group_add_address)
-//        val selectedRadioButton: Int = radioGroup!!.checkedRadioButtonId
-//        radioButton = findViewById(selectedRadioButton)
-//        Toast.makeText(baseContext, radioButton.text, Toast.LENGTH_SHORT).show()
         button_save_address.setOnClickListener {
+            radioGroup = findViewById(R.id.radio_group_add_address)
+            val selectedRadioButton: Int = radioGroup!!.checkedRadioButtonId
+            radioButton = findViewById(selectedRadioButton)
             var pincode = edit_text_address_pincode.text.toString()
             var streetName = edit_text_street_name.text.toString()
             var city = edit_text_address_city.text.toString()
             var houseNo = edit_text_address_house_no.text.toString()
-            var type = "Home"
+            var type = radioButton.text.toString()
             var userId = sessionManager.getUserId()
-            Log.d("abc", userId)
-            var params = HashMap<String, Any>()
-            params["pincode"] = pincode.toInt()
-            params["streetName"] = streetName
-            params["city"] = city
-            params["houseNo"] = houseNo
-            params["type"] = type
-            params["userId"] = userId
+            if (pincode == "" || streetName == "" || city == "" || houseNo == "") {
+                Toast.makeText(
+                    baseContext,
+                    "You haven't completed filling out your address",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
 
-            var jsonObject = JSONObject(params as Map<*, *>)
-            var request = JsonObjectRequest(
-                Request.Method.POST, Endpoints.saveAddress(), jsonObject, {
-                    Toast.makeText(
-                        applicationContext,
-                        "New address added successfully",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                var params = HashMap<String, Any>()
+                params["pincode"] = pincode.toInt()
+                params["streetName"] = streetName
+                params["city"] = city
+                params["houseNo"] = houseNo
+                params["type"] = type
+                params["userId"] = userId
 
-                    Log.d("abc", it.toString() + "Something else")
-                },
-                {
-                    Log.d("abc", it.message.toString())
-                }
-            )
-            Volley.newRequestQueue(this).add(request)
-            finish()
+                var jsonObject = JSONObject(params as Map<*, *>)
+                var request = JsonObjectRequest(
+                    Request.Method.POST, Endpoints.saveAddress(), jsonObject, {
+                        Toast.makeText(
+                            applicationContext,
+                            "New address added successfully",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        Log.d("abc", it.toString() + "Something else")
+                    },
+                    {
+                        Log.d("abc", it.message.toString())
+                    }
+                )
+                Volley.newRequestQueue(this).add(request)
+                finish()
+            }
         }
     }
 

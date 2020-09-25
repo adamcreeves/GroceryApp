@@ -4,8 +4,8 @@
     <item android:title="My Profile"
         android:id="@+id/item_profile" />
 
-    <item android:title="Settings"
-        android:id="@+id/item_settings" />
+    <item android:title="Orders"
+        android:id="@+id/item_orders" />
 
     <item android:title="Shipping Address"
         android:id="@+id/item_address" />

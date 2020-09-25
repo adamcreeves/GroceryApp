@@ -40,6 +40,10 @@ class SessionManager(var myContext: Context) {
         return name.toString()
     }
 
+    fun getEmail() : String {
+        var email = sharedPreferences.getString(KEY_EMAIL, null)
+        return email.toString()
+    }
 
     fun getQuickLogin() : Boolean {
         var token = sharedPreferences.getString(KEY_TOKEN, null)

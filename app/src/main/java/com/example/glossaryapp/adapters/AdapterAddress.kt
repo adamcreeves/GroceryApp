@@ -35,8 +35,8 @@ class AdapterAddress(
     }
 
     fun setData(list: ArrayList<Address>) {
-        myList = list
         notifyDataSetChanged()
+        myList = list
     }
 
     inner class myViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
