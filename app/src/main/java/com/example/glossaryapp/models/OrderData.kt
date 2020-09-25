@@ -1,30 +1,53 @@
 package com.example.glossaryapp.models
 
-data class OrderData(
-    val __v: Int,
-    val _id: String,
-    val date: String,
-    val orderStatus: String,
-    val orderSummary: OrderSummary,
-    val payment: Payment,
-    val products: List<Product>,
-    val shippingAddress: Address,
-    val user: User,
-    val userId: String
-)
+import java.io.Serializable
 
 data class OrderSummary(
-    val _id: String,
-    val deliveryCharges: Int,
-    val discount: Int,
-    val orderAmount: Int,
-    val ourPrice: Int,
-    val totalAmount: Int
-)
+    var deliveryCharges: Int,
+    var discount: Double,
+    var orderAmount: Double,
+    var ourPrice: Double,
+    var totalAmount: Double
+): Serializable
 
 data class Payment(
-    val _id: String,
-    val paymentMode: String,
-    val paymentStatus: String
-)
+    var paymentMode: String,
+    var paymentStatus: String
+): Serializable
 
+data class PaymentProduct(
+    var _id: String,
+    var image: String,
+    var mrp: Double,
+    var price: Double,
+    var quantity: Int
+): Serializable
+
+data class ShippingAddress(
+    var city: String,
+    var houseNo: String,
+    var pincode: Int,
+    var streetName: String
+): Serializable
+
+data class PaymentUser(
+    var _id: String,
+    var email: String,
+    var mobile: String,
+    var name: String
+): Serializable
+
+data class PaymentResponse(
+    var date: String,
+    var orderStatus: String,
+    var orderSummary: OrderSummary,
+    var payment: Payment,
+    var products: ArrayList<PaymentProduct>,
+    var shippingAddress: ShippingAddress,
+    var user: PaymentUser,
+    var userId: String
+): Serializable {
+    companion object{
+        const val KEY_PAYMENT = "payment_object"
+    }
+}

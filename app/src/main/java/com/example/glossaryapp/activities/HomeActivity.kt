@@ -7,10 +7,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
+import androidx.core.view.MenuItemCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,9 +29,12 @@ import com.google.android.material.navigation.NavigationView
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar.*
+import kotlinx.android.synthetic.main.layout_menu_cart.view.*
 import kotlinx.android.synthetic.main.nav_header.view.*
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    var textViewShoppingCartCount: TextView? = null
 
     lateinit var myDrawerLayout: DrawerLayout
     lateinit var myNavView: NavigationView
@@ -52,7 +57,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         var firstName: String? = null
         var email: String? = null
 
-        if(sessionManager.getQuickLogin()) {
+        if (sessionManager.getQuickLogin()) {
             firstName = sessionManager.getFirstName()
             email = sessionManager.getEmail()
         } else {
@@ -67,7 +72,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         var myToggle = ActionBarDrawerToggle(this, myDrawerLayout, toolbar, 0, 0)
         myDrawerLayout.addDrawerListener(myToggle)
         myToggle.syncState()
-        myNavView.setNavigationItemSelectedListener (this)
+        myNavView.setNavigationItemSelectedListener(this)
 
 
         adapterCategory = AdapterCategory(this)
@@ -104,26 +109,42 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(toolbar)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_cart, menu)
+        var item = menu.findItem(R.id.action_cart)
+        MenuItemCompat.setActionView(item, R.layout.layout_menu_cart)
+        var view = MenuItemCompat.getActionView(item)
+        textViewShoppingCartCount = view.text_view_cart_count
+        view.setOnClickListener {
+            startActivity(Intent(applicationContext, ShoppingCartActivity::class.java))
+        }
+        updateShoppingCartCount()
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_cart -> startActivity(
-                Intent(
-                    applicationContext,
-                    ShoppingCartActivity::class.java
-                )
-            )
+    private fun updateShoppingCartCount() {
+        var myCount = 1
+        if(myCount == 0) {
+            textViewShoppingCartCount?.visibility = View.INVISIBLE
+        } else {
+            textViewShoppingCartCount?.visibility = View.VISIBLE
+            textViewShoppingCartCount?.text = myCount.toString()
         }
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
         return true
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.item_profile -> Toast.makeText(this, "You just clicked on your profile. Nice!", Toast.LENGTH_SHORT).show()
+        when (item.itemId) {
+            R.id.item_profile -> Toast.makeText(
+                this,
+                "You just clicked on your profile. Nice!",
+                Toast.LENGTH_SHORT
+            ).show()
             R.id.item_address -> startActivity(Intent(this, AddressActivity::class.java))
             R.id.item_orders -> startActivity(Intent(this, OrderActivity::class.java))
             R.id.item_logout -> dialogLogout()
@@ -134,7 +155,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onBackPressed() {
 
-        if(myDrawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (myDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             myDrawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
@@ -145,12 +166,12 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         var builder = AlertDialog.Builder(this)
         builder.setTitle("Confirm log out")
         builder.setMessage("You really want to go?")
-        builder.setNegativeButton("I guess not", object: DialogInterface.OnClickListener{
+        builder.setNegativeButton("I guess not", object : DialogInterface.OnClickListener {
             override fun onClick(dialog: DialogInterface?, p1: Int) {
                 dialog?.dismiss()
             }
         })
-        builder.setPositiveButton("Yes, right now", object: DialogInterface.OnClickListener{
+        builder.setPositiveButton("Yes, right now", object : DialogInterface.OnClickListener {
             override fun onClick(p0: DialogInterface?, p1: Int) {
                 sessionManager.logout()
                 startActivity(Intent(applicationContext, HomeActivity::class.java))
