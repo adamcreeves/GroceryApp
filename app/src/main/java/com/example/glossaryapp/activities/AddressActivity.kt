@@ -3,6 +3,7 @@ package com.example.glossaryapp.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -43,7 +44,8 @@ class AddressActivity : AppCompatActivity() {
             startActivity(Intent(this, AddAddressActivity::class.java))
         }
         button_to_payment.setOnClickListener {
-            startActivity(Intent(this, PaymentActivity::class.java))
+            Log.d("abc", this.intent.toString())
+
         }
     }
 

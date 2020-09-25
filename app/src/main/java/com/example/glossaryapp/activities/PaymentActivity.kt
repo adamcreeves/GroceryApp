@@ -4,18 +4,24 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.glossaryapp.R
+import com.example.glossaryapp.models.Address
 import kotlinx.android.synthetic.main.activity_payment.*
 import kotlinx.android.synthetic.main.app_bar.*
 
 class PaymentActivity : AppCompatActivity() {
+    var address: Address? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
+        address = intent.getSerializableExtra(Address.KEY_ADDRESS) as Address
+        Log.d("abc", address.toString())
         init()
     }
 

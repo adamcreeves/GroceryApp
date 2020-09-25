@@ -1,16 +1,25 @@
 package com.example.glossaryapp.helpers
 
 import android.content.Context
+import com.example.glossaryapp.models.Address
 import com.example.glossaryapp.models.LoginResponse
 import com.example.glossaryapp.models.User
 
 class SessionManager(var myContext: Context) {
     private val FILE_NAME = "REGISTERED_USERS"
+
     private val KEY_TOKEN = "token"
+
     private val KEY_FIRST_NAME = "firstName"
     private val KEY_ID = "_id"
     private val KEY_EMAIL = "email"
     private val KEY_MOBILE = "mobile"
+
+    private val KEY_PINCODE = "pincode"
+    private val KEY_STREETNAME = "streetName"
+    private val KEY_CITY = "city"
+    private val KEY_HOUSE_NO = "houseNo"
+    private val KEY_TYPE = "type"
 
 
     var sharedPreferences = myContext.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
@@ -38,6 +47,12 @@ class SessionManager(var myContext: Context) {
     fun getFirstName() : String {
         var name = sharedPreferences.getString(KEY_FIRST_NAME, null)
         return name.toString()
+    }
+
+    fun saveAddress(address: Address) {
+        editor.putString(KEY_PINCODE, address.pincode.toString())
+        editor.putString(KEY_STREETNAME, address.streetName)
+        editor.putString(KEY_CITY, address.city)
     }
 
     fun getEmail() : String {
