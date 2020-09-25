@@ -5,13 +5,22 @@
     android:orientation="vertical"
     android:layout_marginBottom="3dp">
 
-    <RadioButton
-        android:id="@+id/radio_button_selected_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/radio_button_select_address"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_margin="15dp"
+        android:background="@drawable/ic_baseline_radio_button_unchecked_24"
         android:layout_alignParentRight="true"/>
 
+    <TextView
+        android:id="@+id/text_view_radio_button_checked"
+        android:visibility="invisible"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/ic_baseline_radio_button_checked_24"
+        android:layout_alignParentRight="true"/>
 
 
     <LinearLayout

@@ -47,6 +47,9 @@ class AdapterAddress(
             itemView.text_view_address_pincode.text = addressData.pincode.toString()
 //            if(mySelectedItem == -1 && position == 0)
             itemView.text_view_address_type.text = addressData.type
+            itemView.radio_button_select_address.setOnClickListener {
+                itemView.text_view_radio_button_checked.visibility = View.VISIBLE
+            }
         }
     }
 
