@@ -91,26 +91,6 @@ class RegisterActivity : AppCompatActivity() {
                     ShoppingCartActivity::class.java
                 )
             )
-            R.id.action_home -> startActivity(
-                Intent(
-                    applicationContext,
-                    HomeActivity::class.java
-                )
-            )
-            R.id.action_settings -> Toast.makeText(
-                applicationContext,
-                "You just clicked on Settings. Great work!",
-                Toast.LENGTH_SHORT
-            ).show()
-            R.id.action_profile -> Toast.makeText(
-                applicationContext,
-                "You just clicked on Profile. Great work!",
-                Toast.LENGTH_SHORT
-            ).show()
-            R.id.action_logout -> {
-                Toast.makeText(applicationContext, "You're already logged out, that's why you're here", Toast.LENGTH_SHORT)
-                    .show()
-            }
         }
         return true
     }

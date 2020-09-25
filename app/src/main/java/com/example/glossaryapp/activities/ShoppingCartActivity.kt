@@ -53,28 +53,6 @@ class ShoppingCartActivity : AppCompatActivity() {
                 "You're already in your cart, my dude",
                 Toast.LENGTH_SHORT
             ).show()
-            R.id.action_home -> startActivity(
-                Intent(
-                    applicationContext,
-                    HomeActivity::class.java
-                )
-            )
-            R.id.action_settings -> Toast.makeText(
-                applicationContext,
-                "You just clicked on Settings. Great work!",
-                Toast.LENGTH_SHORT
-            ).show()
-            R.id.action_profile -> Toast.makeText(
-                applicationContext,
-                "You just clicked on Profile. Great work!",
-                Toast.LENGTH_SHORT
-            ).show()
-            R.id.action_logout -> {
-                Toast.makeText(applicationContext, "You just logged out :(", Toast.LENGTH_SHORT)
-                    .show()
-                sessionManager.logout()
-                startActivity(Intent(applicationContext, HomeActivity::class.java))
-            }
         }
         return true
     }
