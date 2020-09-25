@@ -59,7 +59,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, DA
         val whereClause = "$COLUMN_ID = ?"
         val whereArgs = arrayOf(cartProductData.id)
         var contentValues = ContentValues()
-        contentValues.put(COLUMN_QUANTITY, (cartProductData.quantity + 1))
+        contentValues.put(COLUMN_QUANTITY, (cartProductData.quantity))
         database.update(TABLE_NAME, contentValues, whereClause, whereArgs)
     }
 
@@ -113,5 +113,9 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, DA
         cursor.close()
         return productList
     }
+//
+//    fun clearCartAfterPurchase(){
+//        database.execSQL(dropTable)
+//    }
 
 }

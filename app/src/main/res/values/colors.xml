@@ -5,4 +5,5 @@
     <color name="colorAccent">#879ceb</color>
     <color name="colorPrimaryCompliment">#249</color>
     <color name="colorTextMain">#005e85</color>
+    <color name="colorTextDark">#0063FF</color>
 </resources>

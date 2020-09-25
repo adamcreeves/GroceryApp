@@ -49,11 +49,18 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         getData()
         myDrawerLayout = drawer_layout
         myNavView = nav_view
+        var firstName: String? = null
+        var email: String? = null
 
-        var firstName = sessionManager.getFirstName()
-        var email = sessionManager.getEmail()
+        if(sessionManager.getQuickLogin()) {
+            firstName = sessionManager.getFirstName()
+            email = sessionManager.getEmail()
+        } else {
+            firstName = "Guest!"
+            email = "Please sign in to Purchase"
+        }
+
         var myHeaderView = myNavView.getHeaderView(0)
-
         myHeaderView.text_view_header_firstName.text = firstName
         myHeaderView.text_view_header_email.text = email
 
@@ -118,7 +125,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when(item.itemId) {
             R.id.item_profile -> Toast.makeText(this, "You just clicked on your profile. Nice!", Toast.LENGTH_SHORT).show()
             R.id.item_address -> startActivity(Intent(this, AddressActivity::class.java))
-            R.id.item_orders -> Toast.makeText(this, "You just clicked on Orders. Nice!", Toast.LENGTH_SHORT).show()
+            R.id.item_orders -> startActivity(Intent(this, OrderActivity::class.java))
             R.id.item_logout -> dialogLogout()
         }
         myDrawerLayout.closeDrawer(GravityCompat.START)

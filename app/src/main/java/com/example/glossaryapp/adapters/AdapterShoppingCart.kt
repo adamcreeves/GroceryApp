@@ -12,6 +12,7 @@ import com.example.glossaryapp.database.DBHelper
 import com.example.glossaryapp.models.Address
 import com.example.glossaryapp.models.CartProductData
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_shopping_cart.*
 import kotlinx.android.synthetic.main.row_adapter_shopping_cart.view.*
 
 class AdapterShoppingCart(
