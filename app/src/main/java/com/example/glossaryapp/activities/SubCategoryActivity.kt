@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.MenuItemCompat
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -19,6 +22,7 @@ import com.example.glossaryapp.models.SubCategory
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_sub_category.*
 import kotlinx.android.synthetic.main.app_bar.*
+import kotlinx.android.synthetic.main.layout_menu_cart.view.*
 
 class SubCategoryActivity : AppCompatActivity() {
 
@@ -26,6 +30,7 @@ class SubCategoryActivity : AppCompatActivity() {
     lateinit var adapterFragment: AdapterFragment
     lateinit var sessionManager: SessionManager
     var category: Category? = null
+    var textViewShoppingCartCount: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,20 +47,33 @@ class SubCategoryActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_cart, menu)
+        var item = menu.findItem(R.id.action_cart)
+        MenuItemCompat.setActionView(item, R.layout.layout_menu_cart)
+        var view = MenuItemCompat.getActionView(item)
+        textViewShoppingCartCount = view.text_view_cart_count
+        view.setOnClickListener {
+            startActivity(Intent(applicationContext, ShoppingCartActivity::class.java))
+        }
+        updateShoppingCartCount()
         return true
     }
+
+    private fun updateShoppingCartCount() {
+        var myCount = 1
+        if (myCount == 0) {
+            textViewShoppingCartCount?.visibility = View.INVISIBLE
+        } else {
+            textViewShoppingCartCount?.visibility = View.VISIBLE
+            textViewShoppingCartCount?.text = myCount.toString()
+        }
+    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> finish()
-            R.id.action_cart -> startActivity(
-                Intent(
-                    applicationContext,
-                    ShoppingCartActivity::class.java
-                )
-            )
         }
         return true
     }

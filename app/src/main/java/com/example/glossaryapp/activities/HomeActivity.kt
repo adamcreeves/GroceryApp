@@ -134,7 +134,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
+        when (item.itemId) {
+            android.R.id.home -> finish()
+        }
         return true
     }
 
