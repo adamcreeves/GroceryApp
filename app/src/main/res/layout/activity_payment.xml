@@ -1,23 +1,27 @@
-<LinearLayout android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimaryBackground"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical">
 
     <include layout="@layout/app_bar" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:text="Order Details"
-        android:textStyle="bold"
-        android:textSize="30dp"
         android:textColor="@color/colorTextDark"
-        android:layout_margin="20dp" />
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="515dp"
         android:layout_margin="10dp"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="5dp"
         android:background="@color/colorPrimaryDark">
 
         <FrameLayout
@@ -28,5 +32,16 @@
 
     </androidx.cardview.widget.CardView>
 
+    <Button
+        android:id="@+id/button_payment_place_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorPrimaryDark"
+        android:padding="15dp"
+        android:text="Place Your Order Now"
+        android:textColor="@color/colorTextDark"
+        android:textSize="18dp" />
 
 </LinearLayout>

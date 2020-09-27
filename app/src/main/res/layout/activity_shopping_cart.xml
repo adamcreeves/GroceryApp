@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    android:background="@color/colorPrimaryBackground"
     android:orientation="vertical">
 
     <include layout="@layout/app_bar" />
@@ -10,11 +10,11 @@
         android:id="@+id/text_view_cart_headline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:text="Product List"
-        android:textColor="#eee"
-        android:textSize="35dp" />
+        android:text="Your Cart is Empty"
+        android:textColor="@color/colorTextDark"
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -102,12 +102,15 @@
 
         <Button
             android:id="@+id/button_cart_to_checkout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginRight="25dp"
-            android:text="Checkout" />
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorPrimaryDark"
+            android:padding="15dp"
+            android:textColor="@color/colorTextDark"
+            android:textSize="18dp"
+            android:text="Proceed to Checkout" />
     </LinearLayout>
 
 </LinearLayout>

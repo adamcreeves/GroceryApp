@@ -29,7 +29,7 @@ class Endpoints {
             return Configure.BASE_URL + URL_ADDRESS
         }
 
-        fun getAddress(userId: String): String {
+        fun getOrDeleteAddress(userId: String): String {
             return Configure.BASE_URL + URL_ADDRESS + "/$userId"
         }
 

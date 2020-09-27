@@ -44,7 +44,6 @@ class LoginActivity : AppCompatActivity() {
             params["email"] = loginEmail
             params["password"] = loginPassword
             var jsonObject = JSONObject(params as Map<*, *>)
-            var editor: SharedPreferences.Editor? = null
             var request = JsonObjectRequest(
                 Request.Method.POST, Endpoints.getLogin(), jsonObject, {
                     val gson = Gson()

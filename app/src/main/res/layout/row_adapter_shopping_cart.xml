@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/image_view_cart_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="135dp"
+            android:layout_height="135dp"
             android:layout_centerVertical="true"
             android:layout_margin="10dp"
             android:text="Employee ID: "
@@ -109,10 +109,10 @@
 
         <Button
             android:id="@+id/button_cart_delete"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignParentRight="true"
-            android:layout_margin="10dp"
+            android:layout_margin="7dp"
             android:background="@drawable/ic_baseline_delete_forever_24" />
 
 

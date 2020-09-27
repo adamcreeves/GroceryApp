@@ -1,11 +1,14 @@
 package com.example.glossaryapp.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.glossaryapp.R
+import com.example.glossaryapp.activities.AddressActivity
+import kotlinx.android.synthetic.main.fragment_payment.view.*
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -27,12 +30,14 @@ class PaymentFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var view = inflater.inflate(R.layout.fragment_payment, container, false)
-//        init(view)
+        init(view)
         return view
     }
 
-    private fun init(view: View?) {
-
+    private fun init(view: View) {
+        view.button_payment_change_address.setOnClickListener{
+            startActivity(Intent(context, AddressActivity::class.java))
+        }
     }
 
     companion object {

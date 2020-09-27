@@ -1,6 +1,5 @@
 package com.example.glossaryapp.activities
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,9 +16,11 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.glossaryapp.R
-import com.example.glossaryapp.app.Configure
 import com.example.glossaryapp.app.Endpoints
 import com.example.glossaryapp.helpers.SessionManager
+import com.example.glossaryapp.models.Address
+import com.example.glossaryapp.models.AddressResult
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_add_address.*
 import kotlinx.android.synthetic.main.app_bar.*
 import kotlinx.android.synthetic.main.layout_menu_cart.view.*
@@ -70,6 +71,9 @@ class AddAddressActivity : AppCompatActivity() {
                 var jsonObject = JSONObject(params as Map<*, *>)
                 var request = JsonObjectRequest(
                     Request.Method.POST, Endpoints.saveAddress(), jsonObject, {
+                        val gson = Gson()
+                        var addressResponse = gson.fromJson(it.toString(), AddressResult::class.java)
+                        sessionManager.saveAddress(addressResponse.data[0])
                         Toast.makeText(
                             applicationContext,
                             "New address added successfully",

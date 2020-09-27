@@ -145,7 +145,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.item_address -> startActivity(Intent(this, AddressActivity::class.java))
             R.id.item_orders -> startActivity(Intent(this, OrdersActivity::class.java))
             R.id.item_logout -> dialogLogout()
-            R.id.item_payment -> startActivity(Intent(this, PaymentActivity::class.java))
         }
         myDrawerLayout.closeDrawer(GravityCompat.START)
         return true

@@ -37,9 +37,28 @@ class ShoppingCartActivity : AppCompatActivity() {
         init()
     }
 
+    private fun init() {
+        setupToolbar()
+        myList = dbHelper.getProducts()
+        Toast.makeText(applicationContext, "Your cart items are loading...", Toast.LENGTH_SHORT)
+            .show()
+        adapterShoppingCart = AdapterShoppingCart(this, myList)
+        recycler_view.layoutManager = GridLayoutManager(this, 1)
+        runningTotals()
+        recycler_view.adapter = adapterShoppingCart
+        adapterShoppingCart?.setData(myList)
+        button_cart_to_checkout.setOnClickListener {
+            if (sessionManager.getQuickLogin()) {
+                startActivity(Intent(this, PaymentActivity::class.java))
+            } else {
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
+        }
+    }
+
     private fun setupToolbar() {
         var toolbar = toolbar
-        toolbar.title = "Your Cart"
+        toolbar.title = "Your Shopping Cart"
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
@@ -75,24 +94,6 @@ class ShoppingCartActivity : AppCompatActivity() {
         return true
     }
 
-    private fun init() {
-        setupToolbar()
-        myList = dbHelper.getProducts()
-        Toast.makeText(applicationContext, "Your cart items are loading...", Toast.LENGTH_SHORT)
-            .show()
-        adapterShoppingCart = AdapterShoppingCart(this, myList)
-        recycler_view.layoutManager = GridLayoutManager(this, 1)
-        runningTotals()
-        recycler_view.adapter = adapterShoppingCart
-        adapterShoppingCart?.setData(myList)
-        button_cart_to_checkout.setOnClickListener {
-            if (sessionManager.getQuickLogin()) {
-                startActivity(Intent(this, AddressActivity::class.java))
-            } else {
-                startActivity(Intent(this, LoginActivity::class.java))
-            }
-        }
-    }
 
     override fun onResume() {
         super.onResume()
@@ -102,9 +103,9 @@ class ShoppingCartActivity : AppCompatActivity() {
 
     fun runningTotals() {
         if (myList.size < 1) {
-            text_view_cart_headline.text = "Your cart is empty"
             view_cart_if_items.visibility = View.INVISIBLE
         } else {
+            text_view_cart_headline.text = "Products to Purchase"
             var subtotal = 0.0
             var total = 0.0
             for (i in 0 until myList.size) {

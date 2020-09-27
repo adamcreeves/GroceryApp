@@ -29,30 +29,21 @@
             android:layout_centerHorizontal="true"
             android:layout_margin="10dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="325dp"
-            android:text="Way better than Postmates"
-            android:textSize="15dp"
-            android:textStyle="italic" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="400dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimaryDark"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="All Categories"
-                android:textColor="@color/colorTextMain"
-                android:textSize="25dp"
-                android:textStyle="bold" />
+                android:text="Food Categories"
+                android:textStyle="bold"
+                android:textSize="30dp"
+                android:textColor="@color/colorTextDark"
+                android:layout_margin="10dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"

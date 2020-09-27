@@ -1,5 +1,6 @@
 <LinearLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/colorPrimaryBackground"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -12,12 +13,14 @@
         android:textStyle="bold"
         android:textSize="30dp"
         android:textColor="@color/colorTextDark"
-        android:layout_margin="20dp" />
+        android:layout_margin="10dp" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="235dp"
         android:layout_margin="10dp"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="5dp"
         android:background="@color/colorPrimaryDark">
     <FrameLayout
         android:id="@+id/fragment_layout_profile_user_info"
@@ -29,8 +32,9 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="305dp"
+        android:layout_height="335dp"
         android:layout_margin="10dp"
+        app:cardElevation="10dp"
         android:background="@color/colorPrimaryDark">
     <FrameLayout
         android:id="@+id/fragment_layout_profile_user_address"

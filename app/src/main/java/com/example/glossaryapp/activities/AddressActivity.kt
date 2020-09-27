@@ -48,15 +48,11 @@ class AddressActivity : AppCompatActivity() {
         button_add_new_address.setOnClickListener {
             startActivity(Intent(this, AddAddressActivity::class.java))
         }
-        button_to_payment.setOnClickListener {
-            startActivity(Intent(this, PaymentActivity::class.java))
-
-        }
     }
 
     private fun getData() {
         var userId = sessionManager.getUserId()
-        var request = StringRequest(Request.Method.GET, Endpoints.getAddress(userId), {
+        var request = StringRequest(Request.Method.GET, Endpoints.getOrDeleteAddress(userId), {
             var gson = Gson()
             var addressResult = gson.fromJson(it, AddressResult::class.java)
             myList.addAll(addressResult.data)

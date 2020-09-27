@@ -1,5 +1,6 @@
 package com.example.glossaryapp.activities
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,11 +10,13 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.MenuItemCompat
 import com.example.glossaryapp.R
 import com.example.glossaryapp.fragments.PaymentFragment
 import com.example.glossaryapp.models.Address
 import kotlinx.android.synthetic.main.activity_orders.*
+import kotlinx.android.synthetic.main.activity_payment.*
 import kotlinx.android.synthetic.main.app_bar.*
 import kotlinx.android.synthetic.main.layout_menu_cart.view.*
 
@@ -32,26 +35,23 @@ class PaymentActivity : AppCompatActivity() {
     private fun init() {
         setupToolbar()
         supportFragmentManager.beginTransaction().add(R.id.fragment_layout_payment, PaymentFragment()).commit()
-//        button_payment_credit_card.setOnClickListener {
-//            Toast.makeText(this, "Credit Cards Offline. Cash Payments Only", Toast.LENGTH_SHORT).show()
-//        }
-//        button_payment_cash.setOnClickListener {
-//            var builder = AlertDialog.Builder(this)
-//            builder.setTitle("Payment Confirmation")
-//            builder.setMessage("Are you sure you want to place your order?")
-//            builder.setPositiveButton("Yes", object: DialogInterface.OnClickListener{
-//                override fun onClick(dialog: DialogInterface?, p1: Int) {
-//                    startActivity(Intent(applicationContext, OrderPlacedActivity::class.java))
-//                }
-//            })
-//            builder.setNegativeButton("No", object: DialogInterface.OnClickListener{
-//                override fun onClick(dialog: DialogInterface?, p1: Int) {
-//                    dialog?.dismiss()
-//                }
-//            })
-//            var alertDialog = builder.create()
-//            alertDialog.show()
-//        }
+        button_payment_place_order.setOnClickListener {
+            var builder = AlertDialog.Builder(this)
+            builder.setTitle("Payment Confirmation")
+            builder.setMessage("Are you sure you want to place your order?")
+            builder.setPositiveButton("Yes", object: DialogInterface.OnClickListener{
+                override fun onClick(dialog: DialogInterface?, p1: Int) {
+                    startActivity(Intent(applicationContext, OrderPlacedActivity::class.java))
+                }
+            })
+            builder.setNegativeButton("No", object: DialogInterface.OnClickListener{
+                override fun onClick(dialog: DialogInterface?, p1: Int) {
+                    dialog?.dismiss()
+                }
+            })
+            var alertDialog = builder.create()
+            alertDialog.show()
+        }
     }
 
     private fun setupToolbar() {

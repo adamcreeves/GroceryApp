@@ -10,8 +10,12 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
         <TextView
+            android:id="@+id/payment_address_headline_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -20,6 +24,19 @@
             android:textSize="20dp"
             android:textStyle="bold" />
 
+        <Button
+            android:id="@+id/button_payment_change_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_toRightOf="@id/payment_address_headline_text_view"
+            android:layout_weight="1"
+            android:background="#fff"
+            android:padding="8dp"
+            android:text="Change Address"
+            android:textColor="@color/colorTextDark"
+            android:textSize="12dp" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/text_view_payment_first_name"

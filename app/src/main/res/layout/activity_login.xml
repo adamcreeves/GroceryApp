@@ -18,6 +18,7 @@
             android:layout_gravity="center"
             android:padding="10dp"
             android:text="Login"
+            android:textColor="@color/colorTextDark"
             android:textSize="35dp"
             android:textStyle="italic" />
 
@@ -49,6 +50,7 @@
             android:background="@color/colorPrimary"
             android:padding="10dp"
             android:text="Login"
+            android:textColor="@color/colorTextDark"
             android:textSize="15dp" />
 
     </LinearLayout>
@@ -67,6 +69,7 @@
             android:layout_margin="5dp"
             android:padding="10dp"
             android:text="New User?"
+            android:textColor="@color/colorTextDark"
             android:textSize="20dp"
             android:textStyle="bold" />
 
@@ -76,7 +79,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:padding="10dp"
-            android:text="Register Here" />
+            android:text="Register Here"
+            android:textColor="@color/colorTextDark" />
 
 
     </LinearLayout>
