@@ -14,7 +14,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.core.view.MenuItemCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
@@ -144,8 +143,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.item_profile -> startActivity(Intent(this, ProfileActivity::class.java))
             R.id.item_address -> startActivity(Intent(this, AddressActivity::class.java))
-            R.id.item_orders -> startActivity(Intent(this, OrderActivity::class.java))
+            R.id.item_orders -> startActivity(Intent(this, OrdersActivity::class.java))
             R.id.item_logout -> dialogLogout()
+            R.id.item_payment -> startActivity(Intent(this, PaymentActivity::class.java))
         }
         myDrawerLayout.closeDrawer(GravityCompat.START)
         return true

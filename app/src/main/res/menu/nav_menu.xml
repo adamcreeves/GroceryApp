@@ -16,4 +16,7 @@
     <item android:title="Log out"
         android:id="@+id/item_logout" />
 
+    <item android:title="Payment(Delete later)"
+        android:id="@+id/item_payment" />
+
 </menu>

@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Order Details"
+        android:text="Order History"
         android:textStyle="bold"
         android:textSize="30dp"
         android:textColor="@color/colorTextDark"
@@ -17,15 +17,13 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
+        android:layout_margin="15dp"
         android:background="@color/colorPrimaryDark">
-
         <FrameLayout
-            android:id="@+id/fragment_layout_payment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp" />
-
+            android:layout_margin="15dp"
+            />
     </androidx.cardview.widget.CardView>
 
 

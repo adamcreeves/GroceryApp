@@ -51,7 +51,7 @@ class ShoppingCartActivity : AppCompatActivity() {
         var view = MenuItemCompat.getActionView(item)
         textViewShoppingCartCount = view.text_view_cart_count
         view.setOnClickListener {
-            startActivity(Intent(applicationContext, ShoppingCartActivity::class.java))
+            Toast.makeText(applicationContext, "You're viewing your cart", Toast.LENGTH_SHORT).show()
         }
         updateShoppingCartCount()
         return true

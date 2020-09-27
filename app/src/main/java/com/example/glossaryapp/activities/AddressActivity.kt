@@ -49,7 +49,7 @@ class AddressActivity : AppCompatActivity() {
             startActivity(Intent(this, AddAddressActivity::class.java))
         }
         button_to_payment.setOnClickListener {
-            Log.d("abc", this.intent.toString())
+            startActivity(Intent(this, PaymentActivity::class.java))
 
         }
     }

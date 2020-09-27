@@ -35,9 +35,10 @@
                 android:text="Change Password"
                 android:layout_toRightOf="@id/user_info_headline_text_view"
                 android:textColor="@color/colorTextDark"
-                android:layout_marginLeft="40dp"
-                android:background="@color/colorPrimaryDark"
+                android:layout_marginLeft="10dp"
+                android:background="#fff"
                 android:textSize="12dp"
+                android:cursorVisible="true"
                 android:padding="8dp"/>
 
 
