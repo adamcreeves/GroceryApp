@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.glossaryapp.R
+import com.example.glossaryapp.helpers.SessionManager
 import kotlinx.android.synthetic.main.fragment_user_info.view.*
 
 
@@ -36,6 +37,10 @@ class UserInfoFragment : Fragment() {
     }
 
     private fun init(view: View) {
+        var sessionManager = SessionManager(context!!)
+        view.text_view_user_info_first_name.text = sessionManager.getFirstName()
+        view.text_view_user_info_email.text = sessionManager.getEmail()
+        view.text_view_user_info_mobile.text = sessionManager.getMobile()
         view.button_change_password.setOnClickListener{
 //            startActivity(Intent(this, ))
         }

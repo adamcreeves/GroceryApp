@@ -55,7 +55,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         myNavView = nav_view
         var firstName: String? = null
         var email: String? = null
-
         if (sessionManager.getQuickLogin()) {
             firstName = sessionManager.getFirstName()
             email = sessionManager.getEmail()
@@ -161,14 +160,14 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun dialogLogout() {
         var builder = AlertDialog.Builder(this)
-        builder.setTitle("Confirm log out")
-        builder.setMessage("You really want to go?")
-        builder.setNegativeButton("I guess not", object : DialogInterface.OnClickListener {
+        builder.setTitle("Confirm Log Out")
+        builder.setMessage("Are you sure you want to log out?")
+        builder.setNegativeButton("No", object : DialogInterface.OnClickListener {
             override fun onClick(dialog: DialogInterface?, p1: Int) {
                 dialog?.dismiss()
             }
         })
-        builder.setPositiveButton("Yes, right now", object : DialogInterface.OnClickListener {
+        builder.setPositiveButton("Confirmed", object : DialogInterface.OnClickListener {
             override fun onClick(p0: DialogInterface?, p1: Int) {
                 sessionManager.logout()
                 startActivity(Intent(applicationContext, HomeActivity::class.java))

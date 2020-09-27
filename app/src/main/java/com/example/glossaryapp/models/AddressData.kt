@@ -9,13 +9,13 @@ data class AddressResult(
 )
 
 data class Address(
-    val _id: String,
+    val _id: String?,
     val pincode: Int,
     val streetName: String,
     val city: String,
     val houseNo: String,
-    val type: String,
-    val userId: String,
+    val type: String?,
+    val userId: String?,
 ) : Serializable {
     companion object {
         const val KEY_ADDRESS = "address"

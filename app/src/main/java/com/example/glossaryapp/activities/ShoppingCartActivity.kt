@@ -40,13 +40,11 @@ class ShoppingCartActivity : AppCompatActivity() {
     private fun init() {
         setupToolbar()
         myList = dbHelper.getProducts()
-        Toast.makeText(applicationContext, "Your cart items are loading...", Toast.LENGTH_SHORT)
-            .show()
         adapterShoppingCart = AdapterShoppingCart(this, myList)
         recycler_view.layoutManager = GridLayoutManager(this, 1)
-        runningTotals()
         recycler_view.adapter = adapterShoppingCart
         adapterShoppingCart?.setData(myList)
+        runningTotals()
         button_cart_to_checkout.setOnClickListener {
             if (sessionManager.getQuickLogin()) {
                 startActivity(Intent(this, PaymentActivity::class.java))

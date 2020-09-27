@@ -71,9 +71,9 @@ class AddAddressActivity : AppCompatActivity() {
                 var jsonObject = JSONObject(params as Map<*, *>)
                 var request = JsonObjectRequest(
                     Request.Method.POST, Endpoints.saveAddress(), jsonObject, {
-                        val gson = Gson()
-                        var addressResponse = gson.fromJson(it.toString(), AddressResult::class.java)
-                        sessionManager.saveAddress(addressResponse.data[0])
+//                        val gson = Gson()
+//                        var addressResponse = gson.fromJson(it.toString(), AddressResult::class.java)
+//                        sessionManager.saveAddress(addressResponse.data[0])
                         Toast.makeText(
                             applicationContext,
                             "New address added successfully",

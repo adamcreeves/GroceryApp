@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.glossaryapp.R
 import com.example.glossaryapp.activities.AddressActivity
+import com.example.glossaryapp.database.DBHelper
 import kotlinx.android.synthetic.main.fragment_user_address.view.*
 
 private const val ARG_PARAM1 = "param1"
@@ -37,6 +38,15 @@ class UserAddressFragment : Fragment() {
     }
 
     private fun init(view: View) {
+        var dbHelper = DBHelper(context!!)
+        var address = dbHelper.getAddress()
+        view.text_view_fragment_address_pincode.text = address.pincode.toString()
+        view.text_view_fragment_address_house_no.text = address.houseNo
+        view.text_view_fragment_address_street_name.text = address.streetName
+        view.text_view_fragment_address_city.text = address.city
+        view.text_view_fragment_address_type.text = "Home"
+
+
         view.button_change_address.setOnClickListener{
             startActivity(Intent(context, AddressActivity::class.java))
         }

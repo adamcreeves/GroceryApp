@@ -14,13 +14,6 @@ class SessionManager(var myContext: Context) {
     private val KEY_EMAIL = "email"
     private val KEY_MOBILE = "mobile"
 
-    private val KEY_ADDRESS_ID = "address_id"
-    private val KEY_PINCODE = "pincode"
-    private val KEY_STREETNAME = "streetName"
-    private val KEY_CITY = "city"
-    private val KEY_HOUSE_NO = "houseNo"
-    private val KEY_TYPE = "type"
-
     var sharedPreferences = myContext.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
     var editor = sharedPreferences.edit()
 
@@ -48,24 +41,14 @@ class SessionManager(var myContext: Context) {
         return name.toString()
     }
 
-    fun saveAddress(address: Address) {
-        editor.putString(KEY_ADDRESS_ID, address._id)
-        editor.putString(KEY_PINCODE, address.pincode.toString())
-        editor.putString(KEY_STREETNAME, address.streetName)
-        editor.putString(KEY_CITY, address.city)
-        editor.putString(KEY_HOUSE_NO, address.houseNo)
-        editor.putString(KEY_TYPE, address.type)
-        editor.commit()
-    }
-
-    fun getAddressId() : String {
-        var addressId = sharedPreferences.getString(KEY_ADDRESS_ID, null)
-        return addressId.toString()
-    }
-
     fun getEmail() : String {
         var email = sharedPreferences.getString(KEY_EMAIL, null)
         return email.toString()
+    }
+
+    fun getMobile() : String {
+        var mobile = sharedPreferences.getString(KEY_MOBILE, null)
+        return mobile.toString()
     }
 
     fun getQuickLogin() : Boolean {

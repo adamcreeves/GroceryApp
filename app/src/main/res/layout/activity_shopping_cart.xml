@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sub Total:"
-                android:textColor="#eee"
+                android:textColor="@color/colorTextDark"
                 android:textSize="15dp" />
 
             <TextView
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:text="$0.00"
-                android:textColor="#eee"
+                android:textColor="@color/colorTextDark"
                 android:textSize="15dp" />
         </RelativeLayout>
 
@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Discount:"
-                android:textColor="#eee"
+                android:textColor="@color/colorTextDark"
                 android:textSize="15dp" />
 
             <TextView
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:text="$0.00"
-                android:textColor="#eee"
+                android:textColor="@color/colorTextDark"
                 android:textSize="15dp" />
         </RelativeLayout>
 
@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Total:"
-                android:textColor="#eee"
+                android:textColor="@color/colorTextDark"
                 android:textSize="15dp"
                 android:textStyle="bold" />
 
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:text="$0.00"
-                android:textColor="#eee"
+                android:textColor="@color/colorTextDark"
                 android:textSize="15dp"
                 android:textStyle="bold" />
         </RelativeLayout>

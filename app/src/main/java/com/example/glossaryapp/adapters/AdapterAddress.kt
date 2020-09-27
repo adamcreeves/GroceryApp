@@ -5,11 +5,14 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.example.glossaryapp.R
 import com.example.glossaryapp.activities.PaymentActivity
+import com.example.glossaryapp.activities.ProfileActivity
+import com.example.glossaryapp.database.DBHelper
 import com.example.glossaryapp.helpers.SessionManager
 import com.example.glossaryapp.models.Address
 import com.example.glossaryapp.models.AddressResult
@@ -54,8 +57,11 @@ class AdapterAddress(
             itemView.text_view_address_city.text = addressData.city
             itemView.text_view_address_pincode.text = addressData.pincode.toString()
             itemView.text_view_address_type.text = addressData.type
-            itemView.button_address_delete.setOnClickListener{
-                var _id = sessionManager.getAddressId()
+            itemView.setOnClickListener{
+                var dbHelper = DBHelper(myContext)
+                dbHelper.saveAddress(addressData)
+                Toast.makeText(myContext, "Default shipping address saved", Toast.LENGTH_SHORT).show()
+                myContext.startActivity(Intent(myContext, ProfileActivity::class.java))
             }
         }
     }
