@@ -5,23 +5,21 @@
 
     <ImageView
         android:id="@+id/cart_icon"
-        android:layout_width="35dp"
-        android:layout_margin="7dp"
-        android:layout_height="wrap_content"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         android:src="@drawable/ic_baseline_shopping_cart_24" />
 
     <TextView
         android:id="@+id/text_view_cart_count"
         android:layout_width="13dp"
-        android:layout_height="13dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="5dp"
-        android:background="@drawable/cart_badge_fill"
-        android:gravity="center"
+        android:layout_height="16dp"
+        android:layout_marginTop="3dp"
+        android:layout_centerHorizontal="true"
         android:text="0"
+        android:gravity="center"
         android:textStyle="bold"
-        android:textColor="#fff"
-        android:textSize="9dp" />
+        android:textColor="@color/colorTextDark"
+        android:textSize="13dp" />
 
 
 </RelativeLayout>

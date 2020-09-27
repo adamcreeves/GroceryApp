@@ -142,11 +142,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.item_profile -> Toast.makeText(
-                this,
-                "You just clicked on your profile. Nice!",
-                Toast.LENGTH_SHORT
-            ).show()
+            R.id.item_profile -> startActivity(Intent(this, ProfileActivity::class.java))
             R.id.item_address -> startActivity(Intent(this, AddressActivity::class.java))
             R.id.item_orders -> startActivity(Intent(this, OrderActivity::class.java))
             R.id.item_logout -> dialogLogout()

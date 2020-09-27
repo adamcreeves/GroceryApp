@@ -1,0 +1,93 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:weightSum="6">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/user_address_headline_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Shipping Address:"
+                android:textColor="@color/colorTextDark"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/button_change_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_toRightOf="@id/user_address_headline_text_view"
+                android:layout_weight="1"
+                android:background="@color/colorPrimaryDark"
+                android:padding="8dp"
+                android:text="Change Address"
+                android:textColor="@color/colorTextDark"
+                android:textSize="12dp" />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/text_view_fragment_address_house_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="House Number"
+            android:textColor="@color/colorTextDark"
+            android:textSize="20dp" />
+
+
+        <TextView
+            android:id="@+id/text_view_fragment_address_street_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Street Name"
+            android:textColor="@color/colorTextDark"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/text_view_fragment_address_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="City"
+            android:textColor="@color/colorTextDark"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/text_view_fragment_address_pincode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Pin Code"
+            android:textColor="@color/colorTextDark"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/text_view_fragment_address_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Type"
+            android:textColor="@color/colorTextDark"
+            android:textSize="20dp" />
+    </LinearLayout>
+</RelativeLayout>
