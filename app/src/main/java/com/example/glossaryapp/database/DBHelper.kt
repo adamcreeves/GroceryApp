@@ -213,6 +213,21 @@ fun getOrderSummary() : Array<String> {
         return productList
     }
 
+    fun getCartTotalCount() : Int {
+        var count = 0
+        val columns = arrayOf(COLUMN_QUANTITY)
+        var cursor = database.query(TABLE_NAME_PRODUCT, columns, null, null, null, null, null)
+        if(cursor != null && cursor.moveToFirst()) {
+            do {
+                var qnty = cursor.getString(cursor.getColumnIndex(COLUMN_QUANTITY)).toInt()
+                count = count + qnty
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return count
+    }
+
+
     fun getOrderProducts(): ArrayList<PaymentProduct> {
         var productList: ArrayList<PaymentProduct> = ArrayList()
         var columns = arrayOf(

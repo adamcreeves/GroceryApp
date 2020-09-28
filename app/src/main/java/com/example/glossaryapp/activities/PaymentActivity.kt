@@ -70,8 +70,6 @@ class PaymentActivity : AppCompatActivity() {
         }
 
         button_payment_place_order.setOnClickListener {
-
-//
             startActivity(
                 Intent(
                     applicationContext,
@@ -86,23 +84,23 @@ class PaymentActivity : AppCompatActivity() {
 //            builder.setPositiveButton("Yes", object : DialogInterface.OnClickListener {
 //                override fun onClick(dialog: DialogInterface?, p1: Int) {
 //                    var gson = Gson()
-//                    var obj = gson.toJson(createOrderToPost())
-//                    var jsonObject = JSONObject(obj)
+//                    var jsonObject = gson.fromJson(createOrderToPost().toString, PaymentResponse)
 //                    val request =
 //                        JsonObjectRequest(Request.Method.POST, Endpoints.postOrders(), jsonObject, {
 //                            dbHelper.clearCart()
+//                            startActivity(
+//                                Intent(
+//                                    applicationContext,
+//                                    OrderPlacedActivity::class.java
+//                                )
+//                            )
 //                        },
 //                            {
 //
 //                            }
 //                        )
 //                    Volley.newRequestQueue(applicationContext).add(request)
-//                    startActivity(
-//                        Intent(
-//                            applicationContext,
-//                            OrderPlacedActivity::class.java
-//                        )
-//                    )
+//
 //                }
 //            })
 //            builder.setNegativeButton("No", object : DialogInterface.OnClickListener {
@@ -169,7 +167,7 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun updateShoppingCartCount() {
-        var myCount = 1
+        var myCount = dbHelper.getCartTotalCount()
         if (myCount == 0) {
             textViewShoppingCartCount?.visibility = View.INVISIBLE
         } else {

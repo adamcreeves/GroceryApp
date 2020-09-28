@@ -17,6 +17,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.glossaryapp.R
 import com.example.glossaryapp.app.Endpoints
+import com.example.glossaryapp.database.DBHelper
 import com.example.glossaryapp.helpers.SessionManager
 import com.example.glossaryapp.models.Address
 import com.example.glossaryapp.models.AddressResult
@@ -31,11 +32,12 @@ class AddAddressActivity : AppCompatActivity() {
     var radioGroup: RadioGroup? = null
     lateinit var radioButton: RadioButton
     var textViewShoppingCartCount: TextView? = null
-
+    lateinit var dbHelper: DBHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_address)
+        dbHelper = DBHelper(this)
         sessionManager = SessionManager(this)
         init()
     }
@@ -113,7 +115,7 @@ class AddAddressActivity : AppCompatActivity() {
     }
 
     private fun updateShoppingCartCount() {
-        var myCount = 1
+        var myCount = dbHelper.getCartTotalCount()
         if (myCount == 0) {
             textViewShoppingCartCount?.visibility = View.INVISIBLE
         } else {

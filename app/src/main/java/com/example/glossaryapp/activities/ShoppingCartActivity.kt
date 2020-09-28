@@ -75,7 +75,7 @@ class ShoppingCartActivity : AppCompatActivity() {
     }
 
     private fun updateShoppingCartCount() {
-        var myCount = 1
+        var myCount = dbHelper.getCartTotalCount()
         if(myCount == 0) {
             textViewShoppingCartCount?.visibility = View.INVISIBLE
         } else {

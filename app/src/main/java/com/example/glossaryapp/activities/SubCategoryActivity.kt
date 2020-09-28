@@ -15,6 +15,7 @@ import com.android.volley.toolbox.Volley
 import com.example.glossaryapp.R
 import com.example.glossaryapp.adapters.AdapterFragment
 import com.example.glossaryapp.app.Endpoints
+import com.example.glossaryapp.database.DBHelper
 import com.example.glossaryapp.helpers.SessionManager
 import com.example.glossaryapp.models.Category
 import com.example.glossaryapp.models.SubCategoriesResult
@@ -29,6 +30,7 @@ class SubCategoryActivity : AppCompatActivity() {
     var myList: ArrayList<SubCategory> = ArrayList()
     lateinit var adapterFragment: AdapterFragment
     lateinit var sessionManager: SessionManager
+    lateinit var dbHelper: DBHelper
     var category: Category? = null
     var textViewShoppingCartCount: TextView? = null
 
@@ -36,6 +38,7 @@ class SubCategoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sub_category)
         sessionManager = SessionManager(this)
+        dbHelper = DBHelper(this)
         category = intent.getSerializableExtra(Category.KEY_CATEGORY) as Category
         init()
     }
@@ -61,7 +64,7 @@ class SubCategoryActivity : AppCompatActivity() {
     }
 
     private fun updateShoppingCartCount() {
-        var myCount = 1
+        var myCount = dbHelper.getCartTotalCount()
         if (myCount == 0) {
             textViewShoppingCartCount?.visibility = View.INVISIBLE
         } else {

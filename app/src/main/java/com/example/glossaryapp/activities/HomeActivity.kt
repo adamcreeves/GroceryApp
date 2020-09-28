@@ -21,6 +21,7 @@ import com.android.volley.toolbox.Volley
 import com.example.glossaryapp.R
 import com.example.glossaryapp.adapters.AdapterCategory
 import com.example.glossaryapp.app.Endpoints
+import com.example.glossaryapp.database.DBHelper
 import com.example.glossaryapp.helpers.SessionManager
 import com.example.glossaryapp.models.Category
 import com.example.glossaryapp.models.CategoryResult
@@ -39,11 +40,13 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var myNavView: NavigationView
     private lateinit var sessionManager: SessionManager
     lateinit var adapterCategory: AdapterCategory
+    lateinit var dbHelper: DBHelper
     var myList: ArrayList<Category> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        dbHelper = DBHelper(this)
         sessionManager = SessionManager(this)
         init()
     }
@@ -121,7 +124,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun updateShoppingCartCount() {
-        var myCount = 1
+        var myCount = dbHelper.getCartTotalCount()
         if(myCount == 0) {
             textViewShoppingCartCount?.visibility = View.INVISIBLE
         } else {
