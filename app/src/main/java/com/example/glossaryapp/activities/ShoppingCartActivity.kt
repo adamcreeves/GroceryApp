@@ -44,7 +44,7 @@ class ShoppingCartActivity : AppCompatActivity() {
         recycler_view.layoutManager = GridLayoutManager(this, 1)
         recycler_view.adapter = adapterShoppingCart
         adapterShoppingCart?.setData(myList)
-        runningTotals()
+        currentTotals()
         button_cart_to_checkout.setOnClickListener {
             if (sessionManager.getQuickLogin()) {
                 startActivity(Intent(this, PaymentActivity::class.java))
@@ -99,7 +99,7 @@ class ShoppingCartActivity : AppCompatActivity() {
         adapterShoppingCart?.setData(myList)
     }
 
-    fun runningTotals() {
+    fun currentTotals() {
         if (myList.size < 1) {
             view_cart_if_items.visibility = View.INVISIBLE
         } else {
@@ -113,6 +113,8 @@ class ShoppingCartActivity : AppCompatActivity() {
             text_view_cart_subtotal.text = "$subtotal"
             text_view_cart_discount.text = "${total - subtotal}"
             text_view_cart_total.text = "$total"
+            dbHelper.saveCurrentTotals("$subtotal","${total - subtotal}","$total")
+
         }
     }
 }

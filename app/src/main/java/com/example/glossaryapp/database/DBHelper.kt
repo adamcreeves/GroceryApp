@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.provider.Telephony
 import com.example.glossaryapp.models.Address
 import com.example.glossaryapp.models.CartProductData
+import com.example.glossaryapp.models.OrderSummary
 
 class DBHelper(context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, DATABASE_VERSION) {
     var database = writableDatabase
@@ -33,22 +34,74 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, DA
         const val COLUMN_STREET = "streetName"
         const val COLUMN_CITY = "city"
 
-        const val createSavedAddressTable = "create table $TABLE_NAME_ADDRESS ($COLUMN_PINCODE INTEGER, $COLUMN_HOUSENO CHAR(200), $COLUMN_STREET CHAR(250), $COLUMN_CITY CHAR(250))"
+        const val createSavedAddressTable =
+            "create table $TABLE_NAME_ADDRESS ($COLUMN_PINCODE INTEGER, $COLUMN_HOUSENO CHAR(200), $COLUMN_STREET CHAR(250), $COLUMN_CITY CHAR(250))"
         const val dropAddressTable = "drop table $TABLE_NAME_ADDRESS"
 
+        const val TABLE_NAME_TOTALS = "checkout_totals"
+        const val COLUMN_SUBTOTAL = "subtotal"
+        const val COLUMN_DISCOUNT = "discount"
+        const val COLUMN_DELIVERY_CHARGES = "delivery_charges"
+        const val COLUMN_TOTAL = "total"
+        const val COLUMN_ORDER_AMOUNT = "order_amount"
+
+        const val createProductTotalsTable =
+            "create table $TABLE_NAME_TOTALS ($COLUMN_SUBTOTAL CHAR(200), $COLUMN_DISCOUNT CHAR(200), $COLUMN_DELIVERY_CHARGES CHAR(200), $COLUMN_TOTAL CHAR(200), $COLUMN_ORDER_AMOUNT CHAR(200))"
+        const val dropProductTotalsTable = "drop table $TABLE_NAME_TOTALS"
 
     }
 
     override fun onCreate(database: SQLiteDatabase) {
         database.execSQL(createProductTable)
         database.execSQL(createSavedAddressTable)
+        database.execSQL(createProductTotalsTable)
     }
 
     override fun onUpgrade(database: SQLiteDatabase, p1: Int, p2: Int) {
         database.execSQL(dropProductTable)
+        database.execSQL(dropAddressTable)
+        database.execSQL(dropProductTotalsTable)
         onCreate(database)
     }
 
+    fun saveCurrentTotals(subtotal: String, discount: String, total: String) {
+        var contentValues = ContentValues()
+        contentValues.put(COLUMN_SUBTOTAL, subtotal)
+        contentValues.put(COLUMN_DISCOUNT, discount)
+        contentValues.put(COLUMN_TOTAL, total)
+        if (total.toDouble() < 300.0) {
+            contentValues.put(COLUMN_DELIVERY_CHARGES, "$50.0")
+            contentValues.put(COLUMN_ORDER_AMOUNT, (total.toDouble() + 50.0).toString())
+        } else {
+            contentValues.put(COLUMN_DELIVERY_CHARGES, "$0.0")
+            contentValues.put(COLUMN_ORDER_AMOUNT, total)
+        }
+        database.insert(TABLE_NAME_TOTALS, null, contentValues)
+    }
+
+fun getOrderSummary() : Array<String> {
+    var columns = arrayOf(
+        COLUMN_SUBTOTAL,
+        COLUMN_DISCOUNT,
+        COLUMN_TOTAL,
+        COLUMN_DELIVERY_CHARGES,
+        COLUMN_ORDER_AMOUNT
+    )
+    var currentTotals: Array<String>? = null
+    var cursor = database.query(TABLE_NAME_TOTALS, columns, null, null, null, null, null)
+    if (cursor != null && cursor.moveToFirst()) {
+        do {
+            var ourPrice = cursor.getString(cursor.getColumnIndex(COLUMN_SUBTOTAL))
+            var discount = cursor.getString(cursor.getColumnIndex(COLUMN_DISCOUNT))
+            var totalAmount = cursor.getString(cursor.getColumnIndex(COLUMN_TOTAL))
+            var deliveryCharges = cursor.getString(cursor.getColumnIndex(COLUMN_DELIVERY_CHARGES))
+            var orderAmount = cursor.getString(cursor.getColumnIndex(COLUMN_ORDER_AMOUNT))
+            currentTotals = arrayOf(deliveryCharges.toString(), discount.toString(), orderAmount.toString(), ourPrice.toString(), totalAmount.toString())
+        } while (cursor.moveToNext())
+    }
+    cursor.close()
+    return currentTotals!!
+}
 
     fun saveAddress(address: Address) {
         var contentValues = ContentValues()
@@ -59,7 +112,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, DA
         database.insert(TABLE_NAME_ADDRESS, null, contentValues)
     }
 
-    fun getAddress() : Address {
+    fun getAddress(): Address {
         var columns = arrayOf(
             COLUMN_PINCODE,
             COLUMN_HOUSENO,
@@ -74,7 +127,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, DA
                 var houseNo = cursor.getString(cursor.getColumnIndex(COLUMN_HOUSENO))
                 var streetName = cursor.getString(cursor.getColumnIndex(COLUMN_STREET))
                 var city = cursor.getString(cursor.getColumnIndex(COLUMN_CITY))
-                addressData = Address(null, pincode, streetName, city, houseNo,null, null)
+                addressData = Address(null, pincode, streetName, city, houseNo, null, null)
             } while (cursor.moveToNext())
         }
         cursor.close()

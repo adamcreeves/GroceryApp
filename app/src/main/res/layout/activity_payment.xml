@@ -24,11 +24,296 @@
         app:cardCornerRadius="5dp"
         android:background="@color/colorPrimaryDark">
 
-        <FrameLayout
-            android:id="@+id/fragment_layout_payment"
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp" />
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:padding="10dp"
+                android:background="@color/colorPrimaryDark"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/payment_address_headline_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="Order Shipping To:"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/button_payment_change_address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="35dp"
+                            android:layout_toRightOf="@id/payment_address_headline_text_view"
+                            android:layout_weight="1"
+                            android:background="#fff"
+                            android:padding="8dp"
+                            android:text="Change Address"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="12dp" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/text_view_payment_first_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="First Name"
+                        android:textColor="@color/colorTextDark"
+                        android:textSize="20dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/text_view_payment_house_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="7dp"
+                            android:text="HouseNo"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/text_view_payment_street_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Street Name"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="20dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/text_view_payment_city"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="7dp"
+                            android:text="City"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/text_view_payment_pincode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="7dp"
+                            android:text="Pincode"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/text_view_payment_address_type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Type"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="20dp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="25dp"
+                        android:text="Payment Method:"
+                        android:textColor="@color/colorTextDark"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/button_payment_cash"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:background="@drawable/ic_baseline_radio_button_checked_24" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cash"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="20dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="20dp"/>
+
+                        <Button
+                            android:id="@+id/button_payment_credit_card"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:background="@drawable/ic_baseline_radio_button_unchecked_24"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Credit Card"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="20dp"
+                            android:layout_marginLeft="5dp"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="25dp"
+                        android:text="Order Summary:"
+                        android:textColor="@color/colorTextDark"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Order Subtotal: $"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/text_view_payment_subtotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="subtotal"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="20dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Order Discount: $"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/text_view_payment_discount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="discount"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="20dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Order Total: $"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/text_view_payment_total"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="total"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="20dp" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Order Delivery Fee: "
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/text_view_payment_delivery"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="delivery"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="20dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Order Amount: $ "
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/text_view_payment_amount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="orderAmount"
+                            android:textColor="@color/colorTextDark"
+                            android:textSize="20dp" />
+
+                    </LinearLayout>
+                    <Button
+                        android:id="@+id/button_edit_cart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:padding="8dp"
+                        android:textColor="@color/colorTextDark"
+                        android:text="Edit Cart"
+                        android:background="#fff" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 

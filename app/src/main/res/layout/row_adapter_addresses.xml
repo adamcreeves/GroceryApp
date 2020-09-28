@@ -34,12 +34,6 @@
         android:layout_height="35dp"
         android:background="@drawable/ic_baseline_edit_24" />
 
-    <Button
-        android:layout_marginTop="20dp"
-        android:id="@+id/button_address_select"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:background="@drawable/ic_baseline_done_outline_24" />
 
 </LinearLayout>
 
