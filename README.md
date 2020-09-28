@@ -3,17 +3,35 @@ Our first major project in Apolis Android Training
 
 App screenshots:
 
-[![Screen Shot 2020-09-21 at 8.25.11 PM](https://i.imgur.com/FI9fQvl.png)]
-[![Screen Shot 2020-09-21 at 8.25.18 PM](https://i.imgur.com/32cvV54.png)]
-[![Screen Shot 2020-09-21 at 8.29.27 PM](https://i.imgur.com/L2mCsJb.png)]
-[![Screen Shot 2020-09-21 at 8.12.17 PM](https://i.imgur.com/PaTDwgl.png)]
-[![Screen Shot 2020-09-21 at 8.12.50 PM](https://i.imgur.com/klouUlL.png)]
-[![Screen Shot 2020-09-21 at 8.25.44 PM](https://i.imgur.com/aGGIhox.png)]
-[![Screen Shot 2020-09-21 at 8.25.56 PM](https://i.imgur.com/GOQMEl0.png)]
-[![Screen Shot 2020-09-21 at 8.13.05 PM](https://i.imgur.com/GZDPXuf.png)]
-[![Screen Shot 2020-09-21 at 8.26.04 PM](https://i.imgur.com/1tza8AB.png)]
-[![Screen Shot 2020-09-21 at 8.26.31 PM](https://i.imgur.com/dztWMaP.png)]
-[![Screen Shot 2020-09-24 at 11.39.43 AM](https://i.imgur.com/HHjjfxC.png)]
-[![Screen Shot 2020-09-24 at 10.33.15 AM](https://i.imgur.com/RWNNlny.png)]
-[![Screen Shot 2020-09-23 at 7.42.13 PM](https://i.imgur.com/BR1QwAy.png)]
-[![Screen Shot 2020-09-23 at 7.42.34 PM](https://i.imgur.com/srIFDZQ.png)]
+Splash Screen
+[![Screen Shot 2020-09-28 at 10.28.54 AM](https://i.imgur.com/URBObhj.png)]
+
+Home Screen
+[![Screen Shot 2020-09-28 at 10.29.06 AM](https://i.imgur.com/WJmIXXx.png)]
+
+Drawer Navigation Menu
+[![Screen Shot 2020-09-28 at 10.29.15 AM](https://i.imgur.com/Bb8VHTI.png)]
+
+My Profile Screen
+[![Screen Shot 2020-09-28 at 10.29.22 AM](https://i.imgur.com/28nq4Yv.png)]
+
+Select Shipping Address Screen
+[![Screen Shot 2020-09-28 at 10.29.32 AM](https://i.imgur.com/UwKRV0K.png)]
+
+Add New Address Screen
+[![Screen Shot 2020-09-28 at 10.37.09 AM](https://i.imgur.com/AQzZOES.png)]
+
+Subcategory Screen: Chicken
+[![Screen Shot 2020-09-28 at 10.29.53 AM](https://i.imgur.com/ZjmPLA4.png)]
+
+Product Screen: Chicken Kati Roll
+[![Screen Shot 2020-09-28 at 10.30.07 AM](https://i.imgur.com/95Jt8P1.png)]
+
+Shopping Cart Screen
+[![Screen Shot 2020-09-28 at 10.30.16 AM](https://i.imgur.com/ZOSsUej.png)]
+
+Order Confirmation Screen
+[![Screen Shot 2020-09-28 at 10.30.28 AM](https://i.imgur.com/jnXrE52.png)]
+
+Order Placed Splash Screen
+[![Screen Shot 2020-09-28 at 10.31.00 AM](https://i.imgur.com/y6BDpGW.png)]
