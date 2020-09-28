@@ -147,9 +147,19 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     startActivity(Intent(this, LoginActivity::class.java))
                 }
             }
-            R.id.item_address -> startActivity(Intent(this, AddressActivity::class.java))
+            R.id.item_address -> {
+                if(sessionManager.getQuickLogin()){
+                    startActivity(Intent(this, AddressActivity::class.java))
+                } else {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                }
+            }
             R.id.item_orders -> startActivity(Intent(this, OrdersActivity::class.java))
-            R.id.item_logout -> dialogLogout()
+            R.id.item_logout ->  if(sessionManager.getQuickLogin()){
+                dialogLogout()
+            } else {
+                Toast.makeText(this, "You're not not logged in", Toast.LENGTH_SHORT).show()
+            }
         }
         myDrawerLayout.closeDrawer(GravityCompat.START)
         return true

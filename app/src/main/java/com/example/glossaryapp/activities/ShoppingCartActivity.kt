@@ -87,7 +87,10 @@ class ShoppingCartActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home -> finish()
+            android.R.id.home -> {
+                startActivity(Intent(this, HomeActivity::class.java))
+                finish()
+            }
         }
         return true
     }

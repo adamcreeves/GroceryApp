@@ -11,6 +11,7 @@ class Endpoints {
         private const val URL_PRODUCTS_BY_SUB = "products/sub"
         private const val URL_PRODUCT = "products"
         private const val URL_ADDRESS = "address"
+        private const val URL_ORDERS = "orders"
 
 
         fun getLogin() : String {
@@ -43,6 +44,10 @@ class Endpoints {
 
         fun getProductByProductId(productId: String?) : String {
             return "${Configure.BASE_URL + URL_PRODUCT}/$productId"
+        }
+
+        fun postOrders() : String {
+            return Configure.BASE_URL + URL_ORDERS
         }
 
     }

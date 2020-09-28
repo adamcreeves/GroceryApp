@@ -52,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
                     sessionManager.saveUserLogin(loginResponse.token)
                     Toast.makeText(applicationContext, "Login successful", Toast.LENGTH_SHORT)
                         .show()
-                    startActivity(Intent(this, PaymentActivity::class.java))
+                    startActivity(Intent(this, HomeActivity::class.java))
                 },
                 {
                     Toast.makeText(

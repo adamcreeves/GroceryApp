@@ -10,6 +10,7 @@ import android.provider.Telephony
 import com.example.glossaryapp.models.Address
 import com.example.glossaryapp.models.CartProductData
 import com.example.glossaryapp.models.OrderSummary
+import com.example.glossaryapp.models.PaymentProduct
 
 class DBHelper(context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, DATABASE_VERSION) {
     var database = writableDatabase
@@ -210,6 +211,36 @@ fun getOrderSummary() : Array<String> {
         }
         cursor.close()
         return productList
+    }
+
+    fun getOrderProducts(): ArrayList<PaymentProduct> {
+        var productList: ArrayList<PaymentProduct> = ArrayList()
+        var columns = arrayOf(
+            COLUMN_ID,
+            COLUMN_QUANTITY,
+            COLUMN_MRP,
+            COLUMN_PRICE,
+            COLUMN_IMAGE
+        )
+        var cursor = database.query(TABLE_NAME_PRODUCT, columns, null, null, null, null, null)
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                var quantity = cursor.getInt(cursor.getColumnIndex(COLUMN_QUANTITY))
+                var mrp = cursor.getDouble(cursor.getColumnIndex(COLUMN_MRP))
+                var productName = cursor.getString(cursor.getColumnIndex(COLUMN_PRODUCT_NAME))
+                var price = cursor.getDouble(cursor.getColumnIndex(COLUMN_PRICE))
+                var image = cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE))
+                var product = PaymentProduct(mrp = mrp, price = price, quantity = quantity, image = image)
+                productList.add(product)
+
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return productList
+    }
+
+    fun clearCart() {
+        database.execSQL(dropProductTable);
     }
 
 }
