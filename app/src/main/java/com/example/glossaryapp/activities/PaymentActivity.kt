@@ -34,6 +34,7 @@ class PaymentActivity : AppCompatActivity() {
     private fun init() {
         setupToolbar()
         var sessionManager = SessionManager(this)
+
         var address = dbHelper.getAddress()
         text_view_payment_first_name.text = sessionManager.getFirstName()
         text_view_payment_house_no.text = address.houseNo
@@ -56,7 +57,7 @@ class PaymentActivity : AppCompatActivity() {
             startActivity(Intent(this, AddressActivity::class.java))
         }
         button_edit_cart.setOnClickListener{
-            startActivity(Intent(this, ShoppingCartActivity::class.java))
+            finish()
         }
 
 
@@ -66,6 +67,9 @@ class PaymentActivity : AppCompatActivity() {
             builder.setMessage("Are you sure you want to place your order?")
             builder.setPositiveButton("Yes", object: DialogInterface.OnClickListener{
                 override fun onClick(dialog: DialogInterface?, p1: Int) {
+
+
+
                     startActivity(Intent(applicationContext, OrderPlacedActivity::class.java))
                 }
             })

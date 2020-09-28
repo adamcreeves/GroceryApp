@@ -140,7 +140,13 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.item_profile -> startActivity(Intent(this, ProfileActivity::class.java))
+            R.id.item_profile -> {
+                if(sessionManager.getQuickLogin()){
+                    startActivity(Intent(this, ProfileActivity::class.java))
+                } else {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                }
+            }
             R.id.item_address -> startActivity(Intent(this, AddressActivity::class.java))
             R.id.item_orders -> startActivity(Intent(this, OrdersActivity::class.java))
             R.id.item_logout -> dialogLogout()
@@ -167,7 +173,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 dialog?.dismiss()
             }
         })
-        builder.setPositiveButton("Confirmed", object : DialogInterface.OnClickListener {
+        builder.setPositiveButton("Yes", object : DialogInterface.OnClickListener {
             override fun onClick(p0: DialogInterface?, p1: Int) {
                 sessionManager.logout()
                 startActivity(Intent(applicationContext, HomeActivity::class.java))

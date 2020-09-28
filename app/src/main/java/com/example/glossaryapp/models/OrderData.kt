@@ -4,10 +4,10 @@ import java.io.Serializable
 
 data class OrderSummary(
     var deliveryCharges: Int,
-    var discount: Double,
-    var orderAmount: Double,
-    var ourPrice: Double,
-    var totalAmount: Double
+    var discount: Int,
+    var orderAmount: Int,
+    var ourPrice: Int,
+    var totalAmount: Int
 ): Serializable
 
 data class Payment(
