@@ -8,24 +8,60 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.core.view.MenuItemCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.Request
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.example.glossaryapp.R
+import com.example.glossaryapp.adapters.AdapterOrdersPlaced
+import com.example.glossaryapp.app.Endpoints
 import com.example.glossaryapp.database.DBHelper
+import com.example.glossaryapp.helpers.SessionManager
+import com.example.glossaryapp.models.Address
+import com.example.glossaryapp.models.Data
+import com.example.glossaryapp.models.OrdersResults
+import com.example.glossaryapp.models.PaymentResponse
+import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_orders.*
 import kotlinx.android.synthetic.main.app_bar.*
 import kotlinx.android.synthetic.main.layout_menu_cart.view.*
 
 class OrdersActivity : AppCompatActivity() {
     var textViewShoppingCartCount: TextView? = null
     lateinit var dbHelper: DBHelper
+    lateinit var sessionManager: SessionManager
+    var myList: ArrayList<Data> = ArrayList()
+    var adapterOrdersPlaced: AdapterOrdersPlaced? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_orders)
         dbHelper = DBHelper(this)
+        sessionManager = SessionManager(this)
         init()
     }
 
     private fun init() {
         setupToolbar()
+        getData()
+        adapterOrdersPlaced = AdapterOrdersPlaced(this, myList)
+        recycler_view_orders.layoutManager = LinearLayoutManager(this)
+        recycler_view_orders.adapter = adapterOrdersPlaced
+    }
+
+    private fun getData() {
+        var userId = sessionManager.getUserId()
+        var request = StringRequest(Request.Method.GET, Endpoints.getOrdersByUserId(userId), {
+            var gson = Gson()
+            var ordersResult = gson.fromJson(it, OrdersResults::class.java)
+            myList.addAll(ordersResult.data)
+            adapterOrdersPlaced?.setData(myList)
+        },
+            {
+
+            }
+        )
+        Volley.newRequestQueue(this).add(request)
     }
 
 
