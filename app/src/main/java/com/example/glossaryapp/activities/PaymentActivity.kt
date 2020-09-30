@@ -1,6 +1,5 @@
 package com.example.glossaryapp.activities
 
-import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,7 +8,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.core.view.MenuItemCompat
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
@@ -19,7 +17,6 @@ import com.example.glossaryapp.app.Endpoints
 import com.example.glossaryapp.database.DBHelper
 import com.example.glossaryapp.helpers.SessionManager
 import com.example.glossaryapp.models.*
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_payment.*
 import kotlinx.android.synthetic.main.app_bar.*
 import kotlinx.android.synthetic.main.layout_menu_cart.view.*
@@ -70,37 +67,27 @@ class PaymentActivity : AppCompatActivity() {
         }
 
         button_payment_place_order.setOnClickListener {
+            postOrder()
             startActivity(
                 Intent(
                     applicationContext,
                     OrderPlacedActivity::class.java
                 )
             )
-
+            finish()
 
 //            var builder = AlertDialog.Builder(this)
 //            builder.setTitle("Payment Confirmation")
 //            builder.setMessage("Are you sure you want to place your order?")
 //            builder.setPositiveButton("Yes", object : DialogInterface.OnClickListener {
 //                override fun onClick(dialog: DialogInterface?, p1: Int) {
-//                    var gson = Gson()
-//                    var jsonObject = gson.fromJson(createOrderToPost().toString, PaymentResponse)
-//                    val request =
-//                        JsonObjectRequest(Request.Method.POST, Endpoints.postOrders(), jsonObject, {
-//                            dbHelper.clearCart()
-//                            startActivity(
-//                                Intent(
-//                                    applicationContext,
-//                                    OrderPlacedActivity::class.java
-//                                )
-//                            )
-//                        },
-//                            {
-//
-//                            }
+//                    getPaymentObject()
+//                    startActivity(
+//                        Intent(
+//                            applicationContext,
+//                            OrderPlacedActivity::class.java
 //                        )
-//                    Volley.newRequestQueue(applicationContext).add(request)
-//
+//                    )
 //                }
 //            })
 //            builder.setNegativeButton("No", object : DialogInterface.OnClickListener {
@@ -113,7 +100,24 @@ class PaymentActivity : AppCompatActivity() {
         }
     }
 
-    fun createOrderToPost(): PaymentResponse {
+
+
+    fun postOrder() {
+        var jsonObject = createOrderToPost()
+        val request =
+            JsonObjectRequest(Request.Method.POST, Endpoints.postOrders(), jsonObject, {
+                dbHelper.clearCart()
+            },
+                {
+
+                }
+            )
+        Volley.newRequestQueue(applicationContext).add(request)
+
+    }
+
+
+    fun createOrderToPost(): JSONObject {
         var userId = sessionManager.getUserId()
         var order = dbHelper.getOrderSummary()
         var orderStatus = "Confirmed"
@@ -134,15 +138,16 @@ class PaymentActivity : AppCompatActivity() {
             ShippingAddress(addres!!.city, addres!!.houseNo, addres!!.pincode, addres!!.streetName)
         var payment = Payment("cash", "completed")
         var products = dbHelper.getOrderProducts()
-        return PaymentResponse(
-            userId,
-            orderStatus,
-            orderSummary,
-            user,
-            shippingAddress,
-            payment,
-            products
-        )
+
+        var params = HashMap<String, Any>()
+        params["userId"] = userId
+        params["orderStatus"] = orderStatus
+        params["orderSummary"] = orderSummary
+        params["user"] = user
+        params["shippingAddress"] = shippingAddress
+        params["payment"] = payment
+        params["products"] = products
+        return JSONObject(params as Map<*, *>)
     }
 
 

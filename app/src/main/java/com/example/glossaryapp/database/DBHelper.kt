@@ -6,10 +6,8 @@ import android.content.Context
 import android.database.DatabaseUtils
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.provider.Telephony
 import com.example.glossaryapp.models.Address
 import com.example.glossaryapp.models.CartProductData
-import com.example.glossaryapp.models.OrderSummary
 import com.example.glossaryapp.models.PaymentProduct
 
 class DBHelper(context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, DATABASE_VERSION) {
