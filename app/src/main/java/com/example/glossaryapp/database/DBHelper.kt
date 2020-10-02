@@ -169,13 +169,6 @@ fun getOrderSummary() : Array<String> {
         }
     }
 
-    fun isItemInCart(id: String): Boolean {
-        val query = "select * from $TABLE_NAME_PRODUCT where $COLUMN_ID = ?"
-        val cursor = database.rawQuery(query, arrayOf(id))
-        var count = cursor.count
-        return count != 0
-    }
-
     fun deleteProduct(id: String) {
         val whereClause = "$COLUMN_ID = ?"
         val whereArgs = arrayOf(id)
@@ -210,6 +203,7 @@ fun getOrderSummary() : Array<String> {
         return productList
     }
 
+
     fun getCartTotalCount() : Int {
         var count = 0
         val columns = arrayOf(COLUMN_QUANTITY)
@@ -239,7 +233,6 @@ fun getOrderSummary() : Array<String> {
             do {
                 var quantity = cursor.getInt(cursor.getColumnIndex(COLUMN_QUANTITY))
                 var mrp = cursor.getDouble(cursor.getColumnIndex(COLUMN_MRP))
-                var productName = cursor.getString(cursor.getColumnIndex(COLUMN_PRODUCT_NAME))
                 var price = cursor.getDouble(cursor.getColumnIndex(COLUMN_PRICE))
                 var image = cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE))
                 var product = PaymentProduct(mrp = mrp, price = price, quantity = quantity, image = image)
@@ -252,7 +245,8 @@ fun getOrderSummary() : Array<String> {
     }
 
     fun clearCart() {
-        database.execSQL(dropProductTable);
+        database.execSQL(dropProductTable)
+        database.execSQL(createProductTable)
     }
 
 }

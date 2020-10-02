@@ -67,7 +67,7 @@ class PaymentActivity : AppCompatActivity() {
         }
 
         button_payment_place_order.setOnClickListener {
-       //     postOrder()
+            postOrder()
             startActivity(
                 Intent(
                     applicationContext,
