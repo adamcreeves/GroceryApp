@@ -67,7 +67,7 @@ class PaymentActivity : AppCompatActivity() {
         }
 
         button_payment_place_order.setOnClickListener {
-            postOrder()
+  //          postOrder()
             startActivity(
                 Intent(
                     applicationContext,
@@ -138,6 +138,7 @@ class PaymentActivity : AppCompatActivity() {
             ShippingAddress(addres!!.city, addres!!.houseNo, addres!!.pincode, addres!!.streetName)
         var payment = Payment("cash", "completed")
         var products = dbHelper.getOrderProducts()
+
 
         var params = HashMap<String, Any>()
         params["userId"] = userId

@@ -58,7 +58,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, DA
 
     override fun onUpgrade(database: SQLiteDatabase, p1: Int, p2: Int) {
         database.execSQL(dropProductTable)
-        database.execSQL(dropAddressTable)
         database.execSQL(dropProductTotalsTable)
         onCreate(database)
     }

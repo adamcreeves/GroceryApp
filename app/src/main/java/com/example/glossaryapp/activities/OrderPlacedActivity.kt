@@ -8,7 +8,7 @@ import com.example.glossaryapp.R
 import com.example.glossaryapp.database.DBHelper
 
 class OrderPlacedActivity : AppCompatActivity() {
-    private val delayedTime: Long = 2152
+    private val delayedTime: Long = 2000
     lateinit var dbHelper: DBHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +17,6 @@ class OrderPlacedActivity : AppCompatActivity() {
         var handler = Handler()
         handler.postDelayed({
             startActivity(Intent(this, HomeActivity::class.java))
-            finish()
         }, delayedTime)
     }
 }
