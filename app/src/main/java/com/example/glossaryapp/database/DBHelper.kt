@@ -68,10 +68,10 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, DA
         contentValues.put(COLUMN_DISCOUNT, discount)
         contentValues.put(COLUMN_TOTAL, total)
         if (total.toDouble() < 300.0) {
-            contentValues.put(COLUMN_DELIVERY_CHARGES, "$50.0")
+            contentValues.put(COLUMN_DELIVERY_CHARGES, 50.0)
             contentValues.put(COLUMN_ORDER_AMOUNT, (total.toDouble() + 50.0).toString())
         } else {
-            contentValues.put(COLUMN_DELIVERY_CHARGES, "$0.0")
+            contentValues.put(COLUMN_DELIVERY_CHARGES, 0.0)
             contentValues.put(COLUMN_ORDER_AMOUNT, total)
         }
         database.insert(TABLE_NAME_TOTALS, null, contentValues)

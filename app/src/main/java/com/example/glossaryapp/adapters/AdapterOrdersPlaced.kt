@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.glossaryapp.R
 import com.example.glossaryapp.models.Data
-import com.example.glossaryapp.models.PaymentResponse
 import kotlinx.android.synthetic.main.row_adapter_orders_placed.view.*
 
 class AdapterOrdersPlaced(

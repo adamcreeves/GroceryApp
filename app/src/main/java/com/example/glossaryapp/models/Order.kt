@@ -6,18 +6,7 @@ data class OrdersResults(
     val error: Boolean
 )
 
-data class Data(
-    val __v: Int,
-    val _id: String,
-    val date: String,
-    val orderStatus: String,
-    val orderSummary: OrderSummary2,
-    val payment: Payment2,
-    val products: List<Product2>,
-    val shippingAddress: ShippingAddress2,
-    val user: User2,
-    val userId: String
-)
+
 
 data class OrderSummary2(
     val _id: String,

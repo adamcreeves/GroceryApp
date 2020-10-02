@@ -17,10 +17,8 @@ import com.example.glossaryapp.adapters.AdapterOrdersPlaced
 import com.example.glossaryapp.app.Endpoints
 import com.example.glossaryapp.database.DBHelper
 import com.example.glossaryapp.helpers.SessionManager
-import com.example.glossaryapp.models.Address
 import com.example.glossaryapp.models.Data
 import com.example.glossaryapp.models.OrdersResults
-import com.example.glossaryapp.models.PaymentResponse
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_orders.*
 import kotlinx.android.synthetic.main.app_bar.*

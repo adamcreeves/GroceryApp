@@ -67,7 +67,7 @@ class PaymentActivity : AppCompatActivity() {
         }
 
         button_payment_place_order.setOnClickListener {
-  //          postOrder()
+       //     postOrder()
             startActivity(
                 Intent(
                     applicationContext,
@@ -103,7 +103,8 @@ class PaymentActivity : AppCompatActivity() {
 
 
     fun postOrder() {
-        var jsonObject = createOrderToPost()
+        var obj = createOrderToPost()
+        var jsonObject = JSONObject(obj as Map<* , *>)
         val request =
             JsonObjectRequest(Request.Method.POST, Endpoints.postOrders(), jsonObject, {
                 dbHelper.clearCart()
@@ -117,7 +118,7 @@ class PaymentActivity : AppCompatActivity() {
     }
 
 
-    fun createOrderToPost(): JSONObject {
+    fun createOrderToPost(): Data {
         var userId = sessionManager.getUserId()
         var order = dbHelper.getOrderSummary()
         var orderStatus = "Confirmed"
@@ -138,17 +139,17 @@ class PaymentActivity : AppCompatActivity() {
             ShippingAddress(addres!!.city, addres!!.houseNo, addres!!.pincode, addres!!.streetName)
         var payment = Payment("cash", "completed")
         var products = dbHelper.getOrderProducts()
+return Data(userId = userId, orderStatus = orderStatus, orderSummary = orderSummary, user = user, shippingAddress = shippingAddress, payment = payment, products = products)
 
-
-        var params = HashMap<String, Any>()
-        params["userId"] = userId
-        params["orderStatus"] = orderStatus
-        params["orderSummary"] = orderSummary
-        params["user"] = user
-        params["shippingAddress"] = shippingAddress
-        params["payment"] = payment
-        params["products"] = products
-        return JSONObject(params as Map<*, *>)
+//        var params = HashMap<String, Any>()
+//        params["userId"] = userId
+//        params["orderStatus"] = orderStatus
+//        params["orderSummary"] = orderSummary
+//        params["user"] = user
+//        params["shippingAddress"] = shippingAddress
+//        params["payment"] = payment
+//        params["products"] = products
+//        return JSONObject(params as Map<*, *>)
     }
 
 

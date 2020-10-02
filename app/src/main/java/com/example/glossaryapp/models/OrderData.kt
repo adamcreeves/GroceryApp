@@ -35,14 +35,17 @@ data class PaymentUser(
     var name: String
 ): Serializable
 
-data class PaymentResponse(
-    var userId: String,
-    var orderStatus: String,
-    var orderSummary: OrderSummary,
-    var user: PaymentUser,
-    var shippingAddress: ShippingAddress,
-    var payment: Payment,
-    var products: ArrayList<PaymentProduct>
+data class Data(
+    val __v: Int? = null,
+    val _id: String? = null,
+    val date: String? = null,
+    val orderStatus: String,
+    val orderSummary: OrderSummary,
+    val payment: Payment,
+    val products: List<PaymentProduct>,
+    val shippingAddress: ShippingAddress,
+    val user: PaymentUser,
+    val userId: String
 ): Serializable {
     companion object{
         const val KEY_PAYMENT = "payment_object"
